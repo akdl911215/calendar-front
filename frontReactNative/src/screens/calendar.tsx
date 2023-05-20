@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {Calendar} from 'react-native-calendars';
 import {type RootBottomTabParamList} from '../../App';
-import CustomizedScrollView from '../../src/components/customized.scroll.view';
+import CustomizedScrollView from 'components/customized.scroll.view';
 
 type CalendarProps = BottomTabScreenProps<RootBottomTabParamList, '달력'>;
 const CalendarScreen: React.FC<CalendarProps> = () => {
