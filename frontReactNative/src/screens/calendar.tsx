@@ -1,14 +1,31 @@
-import {View, Text} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {Calendar} from 'react-native-calendars';
 import {type RootBottomTabParamList} from '../../App';
+import CustomizedScrollView from 'components/customized.scroll.view';
 
 type CalendarProps = BottomTabScreenProps<RootBottomTabParamList, '달력'>;
-const Calendar: React.FC<CalendarProps> = () => {
+const CalendarScreen: React.FC<CalendarProps> = () => {
+  const [selected, setSelected] = React.useState('');
   return (
     <View>
-      <Text>Calendar here!</Text>
+      <CustomizedScrollView>
+        <Calendar
+          onDayPress={day => {
+            setSelected(day.dateString);
+          }}
+          markedDates={{
+            [selected]: {
+              selected: true,
+              disableTouchEvent: true,
+              selectedColor: 'orange',
+            },
+          }}
+        />
+      </CustomizedScrollView>
     </View>
   );
 };
 
-export default Calendar;
+export default CalendarScreen;
