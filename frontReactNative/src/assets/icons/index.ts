@@ -1,3 +1,5 @@
-import calendar from 'assets/icons/calendar.svg';
+import calendar from '../icons/calendar.svg';
+import profile from '../icons/profile.svg';
+import todoList from '../icons/todo.list.svg';
 
-export {calendar};
+export {calendar, profile, todoList};
