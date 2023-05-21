@@ -1,7 +1,7 @@
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {RootBottomTabParamList} from '../../App';
-import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text, TextInput, View} from 'react-native';
 
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
 export interface TodoType {
@@ -13,33 +13,44 @@ export interface TodoType {
 
 const TodoList: React.FC<TodoListProps> = () => {
   // api 보내서 응답기준으로 날짜 처리 기준으로 배열 담기
-  const DATE = new Date();
-  console.log('DATE : ', DATE);
+  const currentTimeStamp: number = new Date().getTime();
+  console.log('currentTimeStamp : ', currentTimeStamp);
   const apiTodoList: TodoType[] = [
     {id: '', date: 0, todo: '가족들이랑 식사', done: false},
     {id: '', date: 0, todo: '앱 개발', done: false},
     {id: '', date: 0, todo: '미술관 가기', done: false},
   ];
 
-  // const TodoListTypeArr = TodoListType[];
-  const [previous, setPrevious] = useState([]);
-  const [subsequent, setSubsequent] = useState([]);
+  const TodoListTypeArr: TodoType[] = [];
+  const [previous, setPrevious] = useState(TodoListTypeArr);
+  const [subsequent, setSubsequent] = useState(TodoListTypeArr);
   useEffect(() => {
+    const previousArr = [];
+    const subsequentArr = [];
     for (let i = 0; i < apiTodoList.length; ++i) {
-      // true > 현재 날짜 기준으로 전
-      if (true) {
-        //
-        // "2021-10-11 10:30:25" < "2021-10-11 10:30:26"
+      if (apiTodoList[i].date < currentTimeStamp) {
+        previousArr.push(apiTodoList[i]);
       } else {
-        //
+        subsequentArr.push(apiTodoList[i]);
       }
     }
+
+    setPrevious(previousArr);
+    setSubsequent(subsequentArr);
   }, []);
+
+  const viewPrevious = previous.map(type => (
+    <TextInput placeholder={type.todo} />
+  ));
+  const viewSubsequent = subsequent.map(type => (
+    <TextInput placeholder={type.todo} />
+  ));
 
   return (
     <View>
-      <Text>Calendar here!</Text>
-      <Text>DATE</Text>
+      {/*<View>{1}</View>*/}
+      <View>{viewPrevious}</View>
+      <View>{viewSubsequent}</View>
     </View>
   );
 };
