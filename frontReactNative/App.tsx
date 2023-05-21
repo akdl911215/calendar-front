@@ -47,10 +47,21 @@ function App(): JSX.Element {
   const handleBottomTabRoute: handleBottomTabRoute = ({route}) => ({
     tabBarIcon: ({focused, color, size}) => {
       // focused 속성 사용하여 해당 탭 클릭시 아이콘 변경 가능
-      if (route.name === '달력')
+      if (route.name === '달력') {
         return (
           <SvgIcon name="calendar" width={size} height={size} fill={color} />
         );
+      }
+      if (route.name === '할일') {
+        return (
+          <SvgIcon name="todoList" width={size} height={size} fill={color} />
+        );
+      }
+      if (route.name === '내정보') {
+        return (
+          <SvgIcon name="profile" width={size} height={size} fill={color} />
+        );
+      }
     },
     headerShown: false,
   });
