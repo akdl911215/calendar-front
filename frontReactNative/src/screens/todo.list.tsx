@@ -12,7 +12,7 @@ export interface TodoType {
   done: boolean;
 }
 const {height, width} = Dimensions.get('window');
-const viewHeight: number = height / 3;
+const VIEW_HEIGHT: number = height / 3;
 
 const TodoList: React.FC<TodoListProps> = () => {
   // api 보내서 응답기준으로 날짜 처리 기준으로 배열 담기
@@ -49,26 +49,51 @@ const TodoList: React.FC<TodoListProps> = () => {
     <TextInput placeholder={type.todo} />
   ));
 
+  const colorArr = ['red', 'blue', 'green', 'grey'];
+
   return (
     <View>
       <View>
         <Text style={styles.title}>해야할 일</Text>
-        <View style={styles.previousContent}>
-          {viewPrevious?.map(el => {
-            {
-              return (
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                  <CheckBox disabled={false} />
-                  {el}
-                </View>
-              );
-            }
-          })}
+        <View style={styles.previousContainer}>
+          <View style={styles.previousContent}>
+            {viewPrevious.map((el, key: number) => {
+              {
+                return (
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      backgroundColor: colorArr[key],
+                    }}>
+                    <CheckBox
+                      // style={{width: 20, height: 20}}
+                      disabled={false}
+                    />
+                    <View>{el}</View>
+                  </View>
+                );
+              }
+            })}
+          </View>
         </View>
       </View>
       <View>
         <Text style={styles.title}>지난 일</Text>
-        <View style={styles.subsequentContent}>{viewSubsequent}</View>
+        <View style={styles.subsequentContainer}>
+          <View style={styles.subsequentContent}>
+            {viewSubsequent.map(el => {
+              {
+                return (
+                  <View style={{flex: 1, flexDirection: 'row'}}>
+                    <CheckBox style={{flex: 1}} disabled={false} />
+                    <View style={{flex: 1}}>{el}</View>
+                  </View>
+                );
+              }
+            })}
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -76,8 +101,22 @@ const TodoList: React.FC<TodoListProps> = () => {
 
 const styles = StyleSheet.create({
   title: {fontSize: 25},
-  previousContent: {width, height: viewHeight, backgroundColor: '#FFFFFF'},
-  subsequentContent: {width, height: viewHeight, backgroundColor: '#FFFFFF'},
+  previousContainer: {
+    width,
+    height: VIEW_HEIGHT,
+    backgroundColor: '#FFFFFF',
+  },
+  previousContent: {width, height: VIEW_HEIGHT / 2, backgroundColor: '#FFFFFF'},
+  subsequentContainer: {
+    width,
+    height: VIEW_HEIGHT,
+    backgroundColor: '#FFFFFF',
+  },
+  subsequentContent: {
+    width,
+    height: VIEW_HEIGHT / 2,
+    backgroundColor: '#FFFFFF',
+  },
 });
 
 export default TodoList;
