@@ -24,9 +24,15 @@ const VIEW_HEIGHT: number = height / 3;
 const TodoList: React.FC<TodoListProps> = () => {
   // api 보내서 응답기준으로 날짜 처리 기준으로 배열 담기
   // const currentTimeStamp: number = new Date().getTime();
-  const currentTimeStamp: number = 1685329441085;
-  const MONTH: number = 5;
+  const [month, setMonth] = useState<number>(1);
+  const [currentTimeStamp, setCurrentTimeStamp] = useState<number>(1);
   console.log('currentTimeStamp : ', currentTimeStamp);
+
+  useEffect(() => {
+    setMonth(5);
+    setCurrentTimeStamp(1685329441085);
+  }, []);
+
   const apiTodoList: TodoType[] = [
     {id: '1', date: 0, todo: '가족들이랑 식사', done: false},
     {id: '2', date: 0, todo: '앱 개발', done: false},
@@ -61,16 +67,26 @@ const TodoList: React.FC<TodoListProps> = () => {
   }, []);
 
   const viewPrevious = previous.map(type => (
-    <TextInput placeholder={type.todo} style={{fontSize: 25, padding: 10}} />
+    <TextInput
+      placeholder={type.todo}
+      style={{fontSize: 25, padding: 10}}
+      editable={false}
+      selectTextOnFocus={false}
+    />
   ));
   const viewSubsequent = subsequent.map(type => (
-    <TextInput placeholder={type.todo} style={{fontSize: 25, padding: 10}} />
+    <TextInput
+      placeholder={type.todo}
+      style={{fontSize: 25, padding: 10}}
+      editable={false}
+      selectTextOnFocus={false}
+    />
   ));
 
   return (
     <View>
       <View>
-        <Text style={{fontSize: 25}}>{MONTH}월 중에 할 일</Text>
+        <Text style={{fontSize: 25}}>{month}월 중에 할 일</Text>
         <ScrollView
           style={{
             width,
@@ -89,7 +105,7 @@ const TodoList: React.FC<TodoListProps> = () => {
                       borderWidth: 1,
                       height: 50,
                     }}>
-                    <CheckBox disabled={false} />
+                    <CheckBox />
                     <View>{el}</View>
                   </View>
                 );
@@ -99,7 +115,7 @@ const TodoList: React.FC<TodoListProps> = () => {
         </ScrollView>
       </View>
       <View>
-        <Text style={{fontSize: 25}}>{MONTH}월 중에 지난 일</Text>
+        <Text style={{fontSize: 25}}>{month}월 중에 지난 일</Text>
         <ScrollView
           style={{
             width,
