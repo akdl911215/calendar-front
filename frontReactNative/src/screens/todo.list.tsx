@@ -12,12 +12,12 @@ import {
 import CheckBox from '@react-native-community/checkbox';
 
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
-export interface TodoType {
+export type TodoType = Readonly<{
   id: string;
   date: number;
   todo: string;
   done: boolean;
-}
+}>;
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 3;
 
