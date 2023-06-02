@@ -83,6 +83,8 @@ const TodoList: React.FC<TodoListProps> = () => {
     />
   ));
 
+  const [checkBoxColor, setCheckBoxColor] = useState<boolean>(false);
+
   return (
     <View>
       <View>
@@ -134,7 +136,12 @@ const TodoList: React.FC<TodoListProps> = () => {
                       borderWidth: 1,
                       height: 50,
                     }}>
-                    <CheckBox disabled={false} />
+                    <CheckBox
+                      disabled={false}
+                      value={checkBoxColor}
+                      tintColors={{true: 'blue'}}
+                      onValueChange={() => setCheckBoxColor(!checkBoxColor)}
+                    />
                     <View>{el}</View>
                   </View>
                 );
@@ -147,25 +154,25 @@ const TodoList: React.FC<TodoListProps> = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  title: {fontSize: 25},
-  previousContainer: {
-    width,
-    height: VIEW_HEIGHT,
-    backgroundColor: '#FFFFFF',
-  },
-  previousContent: {width, height: 100, backgroundColor: '#FFFFFF'},
-  subsequentContainer: {
-    width,
-    height: VIEW_HEIGHT,
-    backgroundColor: '#FFFFFF',
-  },
-  subsequentContent: {
-    width,
-    height: VIEW_HEIGHT / 2,
-    backgroundColor: '#FFFFFF',
-  },
-  viewTextInputLists: {fontSize: 25, padding: 10},
-});
+// const styles = StyleSheet.create({
+//   title: {fontSize: 25},
+//   previousContainer: {
+//     width,
+//     height: VIEW_HEIGHT,
+//     backgroundColor: '#FFFFFF',
+//   },
+//   previousContent: {width, height: 100, backgroundColor: '#FFFFFF'},
+//   subsequentContainer: {
+//     width,
+//     height: VIEW_HEIGHT,
+//     backgroundColor: '#FFFFFF',
+//   },
+//   subsequentContent: {
+//     width,
+//     height: VIEW_HEIGHT / 2,
+//     backgroundColor: '#FFFFFF',
+//   },
+//   viewTextInputLists: {fontSize: 25, padding: 10},
+// });
 
 export default TodoList;
