@@ -3,10 +3,10 @@ import {RootBottomTabParamList} from '../../App';
 import React, {useEffect, useState} from 'react';
 import {
   Dimensions,
-  ScrollView,
+  FlatList,
   StyleSheet,
   Text,
-  TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
@@ -20,20 +20,10 @@ export type TodoType = Readonly<{
 }>;
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 3;
+const GAP = width / 30;
 
 const TodoList: React.FC<TodoListProps> = () => {
-  // api 보내서 응답기준으로 날짜 처리 기준으로 배열 담기
-  // const currentTimeStamp: number = new Date().getTime();
-  const [month, setMonth] = useState<number>(1);
-  const [currentTimeStamp, setCurrentTimeStamp] = useState<number>(1);
-  console.log('currentTimeStamp : ', currentTimeStamp);
-
-  useEffect(() => {
-    setMonth(5);
-    setCurrentTimeStamp(1685329441085);
-  }, []);
-
-  const apiTodoList: TodoType[] = [
+  const [apiInitialState, setApiInitialState] = useState<TodoType[]>([
     {id: '1', date: 0, todo: '가족들이랑 식사', done: false},
     {id: '2', date: 0, todo: '앱 개발', done: false},
     {id: '3', date: 0, todo: '미술관 가기', done: false},
@@ -43,136 +33,137 @@ const TodoList: React.FC<TodoListProps> = () => {
     {id: '7', date: 1685329441086, todo: '월요일에 가기', done: false},
     {id: '8', date: 1685329441086, todo: '화요일에 가기', done: false},
     {id: '9', date: 1685329441086, todo: '수요일에 가기', done: false},
-    {id: '7', date: 1685329441086, todo: '월요일에 가기', done: false},
-    {id: '8', date: 1685329441086, todo: '화요일에 가기', done: false},
-    {id: '9', date: 1685329441086, todo: '수요일에 가기', done: false},
-  ];
+    {id: '10', date: 1685329441086, todo: '지옥에 가기', done: false},
+    {id: '11', date: 1685329441086, todo: '수요일에 가기', done: false},
+  ]);
 
   const TodoListTypeArr: TodoType[] = [];
-  const [previous, setPrevious] = useState(TodoListTypeArr);
-  const [subsequent, setSubsequent] = useState(TodoListTypeArr);
+  const [previous, setPrevious] = useState<TodoType[]>(TodoListTypeArr);
+  const [subsequent, setSubsequent] = useState<TodoType[]>(TodoListTypeArr);
+  const [month, setMonth] = useState<number>(1);
+  const [currentTimeStamp, setCurrentTimeStamp] = useState<number>(1);
+  interface renderItemType {
+    item: TodoType;
+    index: number;
+  }
+
+  useEffect(() => {
+    setMonth(5);
+    setCurrentTimeStamp(1685329441085);
+  }, []);
   useEffect(() => {
     const previousArr = [];
     const subsequentArr = [];
-    for (let i = 0; i < apiTodoList.length; ++i) {
-      if (apiTodoList[i].date < currentTimeStamp) {
-        previousArr.push(apiTodoList[i]);
+    for (let i = 0; i < apiInitialState.length; ++i) {
+      if (apiInitialState[i].date < currentTimeStamp) {
+        previousArr.push(apiInitialState[i]);
       } else {
-        subsequentArr.push(apiTodoList[i]);
+        subsequentArr.push(apiInitialState[i]);
       }
     }
 
     setPrevious(previousArr);
     setSubsequent(subsequentArr);
-  }, []);
+  }, [apiInitialState]);
 
-  const viewPrevious = previous.map(type => (
-    <TextInput
-      placeholder={type.todo}
-      style={{fontSize: 25, padding: 10}}
-      editable={false}
-      selectTextOnFocus={false}
-    />
-  ));
-  const viewSubsequent = subsequent.map(type => (
-    <TextInput
-      placeholder={type.todo}
-      style={{fontSize: 25, padding: 10}}
-      editable={false}
-      selectTextOnFocus={false}
-    />
-  ));
+  const rowChangeFunc = ({
+    done,
+    date,
+    index,
+  }: {
+    done: boolean;
+    date: number;
+    index: number;
+  }) => {
+    if (currentTimeStamp > date) {
+      const newState = [...previous];
+      newState[index] = {...previous[index], done};
 
-  const [checkBoxColor, setCheckBoxColor] = useState<boolean>(false);
+      setPrevious(newState);
+    } else {
+      const newState = [...subsequent];
+      newState[index] = {...subsequent[index], done};
+
+      setSubsequent(newState);
+    }
+  };
 
   return (
     <View>
       <View>
-        <Text style={{fontSize: 25}}>{month}월 중에 할 일</Text>
-        <ScrollView
-          style={{
-            width,
-            height: VIEW_HEIGHT,
-            backgroundColor: '#FFFFFF',
-          }}>
-          <View style={{width, backgroundColor: '#FFFFFF'}}>
-            {viewPrevious.map(el => {
-              {
-                return (
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      borderColor: 'black',
-                      borderWidth: 1,
-                      height: 50,
-                    }}>
-                    <CheckBox />
-                    <View>{el}</View>
-                  </View>
-                );
-              }
-            })}
-          </View>
-        </ScrollView>
+        <Text style={styles.title}>{month}월 중에 할 일</Text>
+        <View style={styles.todoListRowContainer}>
+          <FlatList
+            data={previous}
+            renderItem={({item, index}: renderItemType) => (
+              <TouchableOpacity
+                key={index * Math.random()}
+                style={styles.todoListRow}>
+                <CheckBox
+                  value={previous[index].done}
+                  onValueChange={(value: boolean) =>
+                    rowChangeFunc({
+                      done: value,
+                      date: item.date,
+                      index,
+                    })
+                  }
+                />
+                <Text style={styles.todoListRowText}>{item.todo}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
       </View>
       <View>
-        <Text style={{fontSize: 25}}>{month}월 중에 지난 일</Text>
-        <ScrollView
-          style={{
-            width,
-            height: VIEW_HEIGHT,
-            backgroundColor: '#FFFFFF',
-          }}>
-          <View style={{width, backgroundColor: '#FFFFFF'}}>
-            {viewSubsequent.map(el => {
-              {
-                return (
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      borderColor: 'black',
-                      borderWidth: 1,
-                      height: 50,
-                    }}>
-                    <CheckBox
-                      disabled={false}
-                      value={checkBoxColor}
-                      tintColors={{true: 'blue'}}
-                      onValueChange={() => setCheckBoxColor(!checkBoxColor)}
-                    />
-                    <View>{el}</View>
-                  </View>
-                );
-              }
-            })}
-          </View>
-        </ScrollView>
+        <Text style={styles.title}>{month}월 중에 지난 일</Text>
+        <View style={styles.todoListRowContainer}>
+          <FlatList
+            data={subsequent}
+            renderItem={({item, index}: renderItemType) => (
+              <TouchableOpacity
+                key={index * Math.random()}
+                style={styles.todoListRow}>
+                <CheckBox
+                  value={subsequent[index].done}
+                  onValueChange={(value: boolean) =>
+                    rowChangeFunc({
+                      done: value,
+                      date: item.date,
+                      index,
+                    })
+                  }
+                />
+                <Text style={styles.todoListRowText}>{item.todo}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
       </View>
     </View>
   );
 };
 
-// const styles = StyleSheet.create({
-//   title: {fontSize: 25},
-//   previousContainer: {
-//     width,
-//     height: VIEW_HEIGHT,
-//     backgroundColor: '#FFFFFF',
-//   },
-//   previousContent: {width, height: 100, backgroundColor: '#FFFFFF'},
-//   subsequentContainer: {
-//     width,
-//     height: VIEW_HEIGHT,
-//     backgroundColor: '#FFFFFF',
-//   },
-//   subsequentContent: {
-//     width,
-//     height: VIEW_HEIGHT / 2,
-//     backgroundColor: '#FFFFFF',
-//   },
-//   viewTextInputLists: {fontSize: 25, padding: 10},
-// });
+const styles = StyleSheet.create({
+  title: {fontSize: 25},
+
+  todoListRowContainer: {
+    width,
+    backgroundColor: '#FFFFFF',
+    height: VIEW_HEIGHT,
+  },
+  todoListRow: {
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: 'black',
+    borderWidth: 1,
+    height: 50,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    gap: GAP,
+  },
+  todoListRowText: {fontSize: 18, padding: 5},
+});
 
 export default TodoList;
