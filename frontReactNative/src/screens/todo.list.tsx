@@ -18,6 +18,7 @@ export type TodoType = Readonly<{
   date: number;
   todo: string;
   done: boolean;
+  year: number;
   month: number;
   day: number;
   createdAt: number;
@@ -37,6 +38,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '가족들이랑 식사',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -49,6 +51,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '앱 개발',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -61,6 +64,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '미술관 가기',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -73,6 +77,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '베트남 가기',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -85,6 +90,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '학교 가기',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -97,6 +103,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '학원 가기',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -109,6 +116,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '월요일에 가기',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -121,6 +129,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '화요일에 가기',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -133,6 +142,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '수요일에 가기',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -145,6 +155,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '지옥에 가기',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
@@ -157,6 +168,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       todo: '수요일에 가기',
       done: false,
       authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      year: 2023,
       month: 1,
       day: 1,
       createdAt: 0,
