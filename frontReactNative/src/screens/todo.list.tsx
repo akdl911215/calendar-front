@@ -14,27 +14,155 @@ import CheckBox from '@react-native-community/checkbox';
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
 export type TodoType = Readonly<{
   id: string;
+  authorId: string;
   date: number;
   todo: string;
   done: boolean;
+  month: number;
+  day: number;
+  createdAt: number;
+  updatedAt: number | null;
+  deletedAt: number | null;
 }>;
+
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 3;
 const GAP = width / 30;
 
 const TodoList: React.FC<TodoListProps> = () => {
   const [apiInitialState, setApiInitialState] = useState<TodoType[]>([
-    {id: '1', date: 0, todo: '가족들이랑 식사', done: false},
-    {id: '2', date: 0, todo: '앱 개발', done: false},
-    {id: '3', date: 0, todo: '미술관 가기', done: false},
-    {id: '4', date: 0, todo: '베트남 가기', done: false},
-    {id: '5', date: 1685329441086, todo: '학교 가기', done: false},
-    {id: '6', date: 0, todo: '학원 가기', done: false},
-    {id: '7', date: 1685329441086, todo: '월요일에 가기', done: false},
-    {id: '8', date: 1685329441086, todo: '화요일에 가기', done: false},
-    {id: '9', date: 1685329441086, todo: '수요일에 가기', done: false},
-    {id: '10', date: 1685329441086, todo: '지옥에 가기', done: false},
-    {id: '11', date: 1685329441086, todo: '수요일에 가기', done: false},
+    {
+      id: '1',
+      date: 0,
+      todo: '가족들이랑 식사',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '2',
+      date: 0,
+      todo: '앱 개발',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '3',
+      date: 0,
+      todo: '미술관 가기',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '4',
+      date: 0,
+      todo: '베트남 가기',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '5',
+      date: 1685329441086,
+      todo: '학교 가기',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '6',
+      date: 0,
+      todo: '학원 가기',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '7',
+      date: 1685329441086,
+      todo: '월요일에 가기',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '8',
+      date: 1685329441086,
+      todo: '화요일에 가기',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '9',
+      date: 1685329441086,
+      todo: '수요일에 가기',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '10',
+      date: 1685329441086,
+      todo: '지옥에 가기',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
+    {
+      id: '11',
+      date: 1685329441086,
+      todo: '수요일에 가기',
+      done: false,
+      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+      month: 1,
+      day: 1,
+      createdAt: 0,
+      updatedAt: null,
+      deletedAt: null,
+    },
   ]);
 
   const TodoListTypeArr: TodoType[] = [];
@@ -96,9 +224,7 @@ const TodoList: React.FC<TodoListProps> = () => {
           <FlatList
             data={previous}
             renderItem={({item, index}: renderItemType) => (
-              <TouchableOpacity
-                key={index * Math.random()}
-                style={styles.todoListRow}>
+              <TouchableOpacity style={styles.todoListRow}>
                 <CheckBox
                   value={previous[index].done}
                   onValueChange={(value: boolean) =>
@@ -121,9 +247,7 @@ const TodoList: React.FC<TodoListProps> = () => {
           <FlatList
             data={subsequent}
             renderItem={({item, index}: renderItemType) => (
-              <TouchableOpacity
-                key={index * Math.random()}
-                style={styles.todoListRow}>
+              <TouchableOpacity style={styles.todoListRow}>
                 <CheckBox
                   value={subsequent[index].done}
                   onValueChange={(value: boolean) =>
@@ -146,7 +270,6 @@ const TodoList: React.FC<TodoListProps> = () => {
 
 const styles = StyleSheet.create({
   title: {fontSize: 25},
-
   todoListRowContainer: {
     width,
     backgroundColor: '#FFFFFF',
