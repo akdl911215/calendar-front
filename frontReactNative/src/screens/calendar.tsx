@@ -6,6 +6,7 @@ import {type RootBottomTabParamList} from '../../App';
 // import CustomizedScrollView from 'components/customized.scroll.view';
 import {TodoType} from './todo.list';
 import ToDo from 'components/to.do';
+import CalendarModal from 'components/calendar.modal';
 
 type CalendarProps = BottomTabScreenProps<RootBottomTabParamList, '달력'>;
 
@@ -16,9 +17,9 @@ const monthNames = Array.from({length: 12}).map(
 );
 const dayNames = ['월', '화', '수', '목', '금', '토', '일'];
 const apiTodoList: TodoType[] = [
-  {id: '', date: 0, todo: '가족들이랑 식사', done: false},
-  {id: '', date: 0, todo: '앱 개발', done: false},
-  {id: '', date: 0, todo: '미술관 가기', done: false},
+  {id: '0', date: 0, todo: '가족들이랑 식사', done: false},
+  {id: '1', date: 0, todo: '앱 개발', done: false},
+  {id: '2', date: 0, todo: '미술관 가기', done: false},
 ];
 
 LocaleConfig.locales.kr = {
@@ -33,12 +34,14 @@ LocaleConfig.defaultLocale = 'kr';
 
 const CalendarScreen: React.FC<CalendarProps> = () => {
   const [selected, setSelected] = React.useState('');
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
 
   return (
     <View style={styles.container}>
       <Calendar
         onDayPress={day => {
           setSelected(day.dateString);
+          setIsModalVisible(true);
         }}
         markedDates={{
           [selected]: {
@@ -53,12 +56,18 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
         data={apiTodoList}
         renderItem={({item}) => (
           <ToDo
+            key={item.id}
             id={item.id}
             date={item.date}
             done={item.done}
             todo={item.todo}
           />
         )}
+      />
+      <CalendarModal
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        selected={selected}
       />
     </View>
   );
