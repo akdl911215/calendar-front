@@ -7,6 +7,7 @@ import {type RootBottomTabParamList} from '../../App';
 import {TodoType} from './todo.list';
 import ToDo from 'components/to.do';
 import CalendarModal from 'components/calendar.modal';
+import {useKeyboard} from 'hooks/useKeyboard';
 
 type CalendarProps = BottomTabScreenProps<RootBottomTabParamList, '달력'>;
 
@@ -17,9 +18,149 @@ const monthNames = Array.from({length: 12}).map(
 );
 const dayNames = ['월', '화', '수', '목', '금', '토', '일'];
 const apiTodoList: TodoType[] = [
-  {id: '0', date: 0, todo: '가족들이랑 식사', done: false},
-  {id: '1', date: 0, todo: '앱 개발', done: false},
-  {id: '2', date: 0, todo: '미술관 가기', done: false},
+  {
+    id: '1',
+    date: 0,
+    todo: '가족들이랑 식사',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '2',
+    date: 0,
+    todo: '앱 개발',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '3',
+    date: 0,
+    todo: '미술관 가기',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '4',
+    date: 0,
+    todo: '베트남 가기',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '5',
+    date: 1685329441086,
+    todo: '학교 가기',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '6',
+    date: 0,
+    todo: '학원 가기',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '7',
+    date: 1685329441086,
+    todo: '월요일에 가기',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '8',
+    date: 1685329441086,
+    todo: '화요일에 가기',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '9',
+    date: 1685329441086,
+    todo: '수요일에 가기',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '10',
+    date: 1685329441086,
+    todo: '지옥에 가기',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    id: '11',
+    date: 1685329441086,
+    todo: '수요일에 가기',
+    done: false,
+    authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
+    year: 2023,
+    month: 1,
+    day: 1,
+    createdAt: 0,
+    updatedAt: null,
+    deletedAt: null,
+  },
 ];
 
 LocaleConfig.locales.kr = {
@@ -36,8 +177,16 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
   const [selected, setSelected] = React.useState('');
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
+  const {isKeyboardVisible, keyboardHeight} = useKeyboard();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          marginTop: isKeyboardVisible ? -keyboardHeight / 3 : 0,
+        },
+      ]}>
       <Calendar
         onDayPress={day => {
           setSelected(day.dateString);
@@ -58,9 +207,16 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
           <ToDo
             key={item.id}
             id={item.id}
+            authorId={item.authorId}
             date={item.date}
             done={item.done}
             todo={item.todo}
+            year={item.year}
+            month={item.month}
+            day={item.day}
+            createdAt={item.createdAt}
+            deletedAt={item.deletedAt}
+            updatedAt={item.updatedAt}
           />
         )}
       />
