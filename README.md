@@ -1,6 +1,8 @@
 # calendar-front
 
-<br>
+<br><br>
+서버: http://15.164.39.69:9595/docs#/
+<br><br>
 Skill Speccification: Rect Native
 <br><br>
 협업 코드 컨벤션: https://calendar1215.atlassian.net/l/cp/6SteoQ01
