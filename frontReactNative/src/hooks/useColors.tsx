@@ -1,4 +1,4 @@
-import {useColorScheme} from 'react-native/types';
+import {useColorScheme} from 'react-native';
 
 export const palette = {
   'gray-0': '#000000',

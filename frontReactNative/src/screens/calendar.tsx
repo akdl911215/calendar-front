@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import {FlatList, View, StyleSheet, Dimensions} from 'react-native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
@@ -8,6 +8,7 @@ import {TodoType} from './todo.list';
 import ToDo from 'components/to.do';
 import CalendarModal from 'components/calendar.modal';
 import {useKeyboard} from 'hooks/useKeyboard';
+import TodoViewModal from 'components/todo.view.modal';
 
 type CalendarProps = BottomTabScreenProps<RootBottomTabParamList, '달력'>;
 
@@ -174,8 +175,10 @@ LocaleConfig.locales.kr = {
 LocaleConfig.defaultLocale = 'kr';
 
 const CalendarScreen: React.FC<CalendarProps> = () => {
-  const [selected, setSelected] = React.useState('');
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [selected, setSelected] = useState('');
+  const [selectedTodo, setSelectedTodo] = useState<TodoType>();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isViewModalVisible, setIsViewModalVisible] = useState(false);
 
   const {isKeyboardVisible, keyboardHeight} = useKeyboard();
 
@@ -206,17 +209,9 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
         renderItem={({item}) => (
           <ToDo
             key={item.id}
-            id={item.id}
-            authorId={item.authorId}
-            date={item.date}
-            done={item.done}
-            todo={item.todo}
-            year={item.year}
-            month={item.month}
-            day={item.day}
-            createdAt={item.createdAt}
-            deletedAt={item.deletedAt}
-            updatedAt={item.updatedAt}
+            todo={item}
+            setSelectedTodo={setSelectedTodo}
+            setIsModalVisible={setIsViewModalVisible}
           />
         )}
       />
@@ -224,6 +219,11 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
         selected={selected}
+      />
+      <TodoViewModal
+        setIsModalVisible={setIsViewModalVisible}
+        isModalVisible={isViewModalVisible}
+        selected={selectedTodo}
       />
     </View>
   );

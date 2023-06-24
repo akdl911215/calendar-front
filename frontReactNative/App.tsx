@@ -5,7 +5,6 @@
  * @format
  */
 
-import React from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -28,6 +27,7 @@ import Calendar from './src/screens/calendar';
 import Profile from './src/screens/profile';
 import {SvgIcon} from './src/components/svg.icon';
 import TodoList from './src/screens/todo.list';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 export type RootBottomTabParamList = {
   달력: undefined;
@@ -68,24 +68,26 @@ function App(): JSX.Element {
   const str = 'Hello Box';
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: colors.background,
-      }}>
-      <View style={styles.commonBox}>
-        <View style={styles.advertisingBox}>
-          <Text>{str}</Text>
+    <SafeAreaProvider>
+      <SafeAreaView
+        style={{
+          flex: 1,
+          backgroundColor: colors.background,
+        }}>
+        <View style={styles.commonBox}>
+          <View style={styles.advertisingBox}>
+            <Text>{str}</Text>
+          </View>
         </View>
-      </View>
-      <NavigationContainer theme={isDark ? DarkTheme : DefaultTheme}>
-        <BottomTab.Navigator screenOptions={handleBottomTabRoute}>
-          <BottomTab.Screen name="달력" component={Calendar} />
-          <BottomTab.Screen name="할일" component={TodoList} />
-          <BottomTab.Screen name="내정보" component={Profile} />
-        </BottomTab.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+        <NavigationContainer theme={isDark ? DarkTheme : DefaultTheme}>
+          <BottomTab.Navigator screenOptions={handleBottomTabRoute}>
+            <BottomTab.Screen name="달력" component={Calendar} />
+            <BottomTab.Screen name="할일" component={TodoList} />
+            <BottomTab.Screen name="내정보" component={Profile} />
+          </BottomTab.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
