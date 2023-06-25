@@ -1,31 +1,33 @@
 import {useState} from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Text, Dimensions, StyleSheet, TouchableOpacity} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {type TodoType} from 'screens/todo.list';
-// import {palette} from 'hooks/useColors';
 
-interface Props extends TodoType {}
+interface Props {
+  todo: TodoType;
+  setSelectedTodo: (value: TodoType) => void;
+  setIsModalVisible: (value: boolean) => void;
+}
 
 const {width} = Dimensions.get('window');
 const GAP = width / 30;
 
-const ToDo: React.FC<Props> = ({id, date, todo, done}) => {
-  console.log(id, date, done);
+const ToDo: React.FC<Props> = ({todo, setSelectedTodo, setIsModalVisible}) => {
   const [isSelected, setIsSelected] = useState(false);
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        setSelectedTodo(todo);
+        setIsModalVisible(true);
+      }}>
       <CheckBox
         value={isSelected}
         onValueChange={setIsSelected}
         style={styles.checkbox}
       />
-      <Text>{todo}</Text>
+      <Text>{todo.todo}</Text>
     </TouchableOpacity>
   );
 };
