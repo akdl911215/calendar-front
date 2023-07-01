@@ -1,5 +1,6 @@
 import {useState} from 'react';
-import {Text, Dimensions, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+
 import CheckBox from '@react-native-community/checkbox';
 import {type TodoType} from 'screens/todo.list';
 
@@ -13,7 +14,17 @@ const {width} = Dimensions.get('window');
 const GAP = width / 30;
 
 const ToDo: React.FC<Props> = ({todo, setSelectedTodo, setIsModalVisible}) => {
-  const [isSelected, setIsSelected] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const updateTextStyleByIsChecked = () => {
+    if (isChecked)
+      return {
+        textDecorationLine: 'line-through',
+        textDecorationStyle: 'solid',
+        color: 'rgb(200, 200, 200)',
+      } as const;
+    return null;
+  };
 
   return (
     <TouchableOpacity
@@ -22,12 +33,17 @@ const ToDo: React.FC<Props> = ({todo, setSelectedTodo, setIsModalVisible}) => {
         setSelectedTodo(todo);
         setIsModalVisible(true);
       }}>
-      <CheckBox
-        value={isSelected}
-        onValueChange={setIsSelected}
-        style={styles.checkbox}
-      />
-      <Text>{todo.todo}</Text>
+      <TouchableOpacity onPress={e => e.stopPropagation()}>
+        <CheckBox
+          value={isChecked}
+          style={styles.checkbox}
+          onValueChange={setIsChecked}
+          onTouchEnd={e => {
+            e.stopPropagation();
+          }}
+        />
+      </TouchableOpacity>
+      <Text style={updateTextStyleByIsChecked()}>{todo.todo}</Text>
     </TouchableOpacity>
   );
 };
