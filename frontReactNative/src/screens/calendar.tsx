@@ -220,11 +220,13 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
         setIsModalVisible={setIsModalVisible}
         selected={selected}
       />
-      <TodoViewModal
-        setIsModalVisible={setIsViewModalVisible}
-        isModalVisible={isViewModalVisible}
-        selected={selectedTodo}
-      />
+      {selectedTodo ? (
+        <TodoViewModal
+          setIsModalVisible={setIsViewModalVisible}
+          isModalVisible={isViewModalVisible}
+          selected={selectedTodo}
+        />
+      ) : null}
     </View>
   );
 };
