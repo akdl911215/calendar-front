@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
   title: {fontSize: 25},
   todoListRowContainer: {
     width,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFFAFA',
     height: VIEW_HEIGHT,
   },
   todoListRow: {
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     gap: GAP,
   },
-  todoListRowText: {fontSize: 18, padding: 5},
+  todoListRowText: {fontSize: 18, padding: 5, borderColor: '#ffffcc'},
 });
 
 export default TodoList;
