@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
+import {DATE} from '../_common/get.date';
 
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
 export type TodoType = Readonly<{
@@ -21,9 +22,9 @@ export type TodoType = Readonly<{
   year: number;
   month: number;
   day: number;
-  createdAt: number;
-  updatedAt: number | null;
-  deletedAt: number | null;
+  createdAt: Date;
+  updatedAt: Date | null;
+  deletedAt: Date | null;
 }>;
 
 const {height, width} = Dimensions.get('window');
@@ -41,8 +42,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -54,8 +55,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -67,8 +68,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -80,8 +81,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -93,8 +94,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -106,8 +107,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -119,8 +120,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -132,8 +133,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -145,8 +146,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -158,8 +159,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
     {
@@ -171,8 +172,8 @@ const TodoList: React.FC<TodoListProps> = () => {
       year: 2023,
       month: 1,
       day: 1,
-      createdAt: 0,
-      updatedAt: null,
+      createdAt: DATE,
+      updatedAt: DATE,
       deletedAt: null,
     },
   ]);

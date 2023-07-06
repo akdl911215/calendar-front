@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 
 // : React.FC<void>  필요업을때는?
 const SignIn = () => {
@@ -6,7 +6,7 @@ const SignIn = () => {
     <>
       <View>
         <View>
-          <span>Login</span>
+          <Text>Login</Text>
         </View>
       </View>
     </>

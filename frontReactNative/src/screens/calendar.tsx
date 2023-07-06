@@ -3,17 +3,16 @@ import {FlatList, View, StyleSheet, Dimensions} from 'react-native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 import {type RootBottomTabParamList} from '../../App';
-// import CustomizedScrollView from 'components/customized.scroll.view';
 import {TodoType} from './todo.list';
 import ToDo from 'components/to.do';
 import CalendarModal from 'components/calendar.modal';
 import {useKeyboard} from 'hooks/useKeyboard';
 import TodoViewModal from 'components/todo.view.modal';
+import {DATE} from '../_common/get.date';
 
 type CalendarProps = BottomTabScreenProps<RootBottomTabParamList, '달력'>;
 
 const {width} = Dimensions.get('window');
-
 const monthNames = Array.from({length: 12}).map(
   (item, index) => `${index + 1}월`,
 );
@@ -28,8 +27,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -41,8 +40,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -54,8 +53,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -67,8 +66,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -80,8 +79,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -93,8 +92,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -106,8 +105,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -119,8 +118,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -132,8 +131,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -145,8 +144,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
   {
@@ -158,8 +157,8 @@ const apiTodoList: TodoType[] = [
     year: 2023,
     month: 1,
     day: 1,
-    createdAt: 0,
-    updatedAt: null,
+    createdAt: DATE,
+    updatedAt: DATE,
     deletedAt: null,
   },
 ];

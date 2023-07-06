@@ -24,7 +24,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import Calendar from './src/screens/calendar';
-import MyInformation from './src/screens/my.information';
+import MyPage from './src/screens/my.page';
 import {SvgIcon} from './src/components/svg.icon';
 import TodoList from './src/screens/todo.list';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -83,7 +83,7 @@ function App(): JSX.Element {
           <BottomTab.Navigator screenOptions={handleBottomTabRoute}>
             <BottomTab.Screen name="달력" component={Calendar} />
             <BottomTab.Screen name="할일" component={TodoList} />
-            <BottomTab.Screen name="내정보" component={MyInformation} />
+            <BottomTab.Screen name="내정보" component={MyPage} />
           </BottomTab.Navigator>
         </NavigationContainer>
       </SafeAreaView>
