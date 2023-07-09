@@ -1,16 +1,17 @@
-import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {RootBottomTabParamList} from '../../App';
 import React, {useEffect, useState} from 'react';
 import {
-  Dimensions,
+  View,
+  Text,
   FlatList,
   StyleSheet,
-  Text,
+  Dimensions,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import {DATE} from '../_common/get.date';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+
+import {RootBottomTabParamList} from '../../App';
+import {todoMockList} from '_common/todo.mock.data';
 
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
 export type TodoType = Readonly<{
@@ -32,151 +33,8 @@ const VIEW_HEIGHT: number = height / 3;
 const GAP = width / 30;
 
 const TodoList: React.FC<TodoListProps> = () => {
-  const [apiInitialState, setApiInitialState] = useState<TodoType[]>([
-    {
-      id: '1',
-      date: 0,
-      todo: '가족들이랑 식사',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '2',
-      date: 0,
-      todo: '앱 개발',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '3',
-      date: 0,
-      todo: '미술관 가기',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '4',
-      date: 0,
-      todo: '베트남 가기',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '5',
-      date: 1685329441086,
-      todo: '학교 가기',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '6',
-      date: 0,
-      todo: '학원 가기',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '7',
-      date: 1685329441086,
-      todo: '월요일에 가기',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '8',
-      date: 1685329441086,
-      todo: '화요일에 가기',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '9',
-      date: 1685329441086,
-      todo: '수요일에 가기',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '10',
-      date: 1685329441086,
-      todo: '지옥에 가기',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-    {
-      id: '11',
-      date: 1685329441086,
-      todo: '수요일에 가기',
-      done: false,
-      authorId: '8654f7b1-d588-4c2b-87a3-124365f13cc1',
-      year: 2023,
-      month: 1,
-      day: 1,
-      createdAt: DATE,
-      updatedAt: DATE,
-      deletedAt: null,
-    },
-  ]);
+  const [apiInitialState, setApiInitialState] =
+    useState<TodoType[]>(todoMockList);
 
   const TodoListTypeArr: TodoType[] = [];
   const [previous, setPrevious] = useState<TodoType[]>(TodoListTypeArr);
@@ -192,9 +50,11 @@ const TodoList: React.FC<TodoListProps> = () => {
     setMonth(5);
     setCurrentTimeStamp(1685329441085);
   }, []);
+
   useEffect(() => {
     const previousArr = [];
     const subsequentArr = [];
+
     for (let i = 0; i < apiInitialState.length; ++i) {
       if (apiInitialState[i].date < currentTimeStamp) {
         previousArr.push(apiInitialState[i]);
