@@ -15,6 +15,7 @@ import ToDo from 'components/to.do';
 import CalendarModal from 'components/calendar.modal';
 import {useKeyboard} from 'hooks/useKeyboard';
 import TodoViewModal from 'components/todo.view.modal';
+import {DATE} from '../_common/get.date';
 import {todoMockList} from '_common/todo.mock.data';
 
 type CalendarProps = BottomTabScreenProps<RootBottomTabParamList, '달력'>;
@@ -24,7 +25,6 @@ const monthNames = Array.from({length: 12}).map(
   (item, index) => `${index + 1}월`,
 );
 const dayNames = ['월', '화', '수', '목', '금', '토', '일'];
-
 // const monthNames = Array.from({length: 12}).map(
 //   (item, index) => `${index + 1}월`,
 // );

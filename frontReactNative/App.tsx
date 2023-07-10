@@ -94,7 +94,7 @@ function App(): JSX.Element {
 const styles = StyleSheet.create({
   advertisingBox: {
     position: 'absolute',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fef1f6',
     height: 50,
     width: '100%',
   },

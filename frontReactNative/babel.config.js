@@ -10,6 +10,7 @@ module.exports = {
           components: './src/components',
           screens: './src/screens',
           hooks: './src/hooks',
+          _common: './src/_common',
         },
       },
     ],
