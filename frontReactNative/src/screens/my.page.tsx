@@ -12,7 +12,7 @@ type MyInformationProps = BottomTabScreenProps<
 
 const MyPage: React.FC<MyInformationProps> = () => {
   const [state, setState] = useState<boolean>(true);
-  return <View>{state === true ? <SignIn /> : <Profile />}</View>;
+  return <View>{state === false ? <SignIn /> : <Profile />}</View>;
 };
 
 export default MyPage;
