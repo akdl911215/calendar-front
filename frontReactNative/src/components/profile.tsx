@@ -1,7 +1,7 @@
-import {Alert, Button, Dimensions, Text, TextInput, View} from 'react-native';
+import {Dimensions, Pressable, Text, TextInput, View} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
-const VIEW_HEIGHT: number = height / 2.2;
+const VIEW_HEIGHT: number = height / 2;
 const VIEW_WIDTH = width / 1.3;
 
 const Profile = () => {
@@ -32,7 +32,8 @@ const Profile = () => {
           }}>
           <Text
             style={{
-              paddingVertical: 20,
+              paddingTop: 10,
+              paddingBottom: 65,
               fontSize: 27,
               fontStyle: 'normal',
               fontWeight: '400',
@@ -55,19 +56,34 @@ const Profile = () => {
             }}>
             <View style={{width: '100%'}}>
               <TextInput
-                style={{borderWidth: 1, width: '100%', borderRadius: 4}}
+                style={{
+                  borderWidth: 1,
+                  width: '100%',
+                  height: 40,
+                  borderRadius: 4,
+                }}
                 placeholder=" 아이디"
               />
             </View>
             <View style={{width: '100%'}}>
               <TextInput
-                style={{borderWidth: 1, width: '100%', borderRadius: 4}}
+                style={{
+                  borderWidth: 1,
+                  width: '100%',
+                  height: 40,
+                  borderRadius: 4,
+                }}
                 placeholder=" 닉네임"
               />
             </View>
             <View style={{width: '100%'}}>
               <TextInput
-                style={{borderWidth: 1, width: '100%', borderRadius: 4}}
+                style={{
+                  borderWidth: 1,
+                  width: '100%',
+                  height: 40,
+                  borderRadius: 4,
+                }}
                 placeholder=" 핸드폰"
               />
             </View>
@@ -76,17 +92,52 @@ const Profile = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}>
-              <Button
-                title="회원 정보 수정"
-                onPress={() => Alert.alert('Profile Button pressed')}
-              />
+              <Pressable
+                // onPress={() => Alert.alert('Login Button pressed')}
+                style={({pressed}) => [
+                  {
+                    backgroundColor: pressed ? 'white' : 'rgb(210, 230, 255)',
+                  },
+                  {
+                    borderRadius: 8,
+                    padding: 6,
+                  },
+                ]}>
+                {({pressed}) => (
+                  <Text>
+                    {pressed ? '회원 정보 수정 중...' : '회원 정보 수정'}
+                  </Text>
+                )}
+              </Pressable>
             </View>
-          </View>
-
-          <View style={{borderWidth: 1, borderRadius: 4}}>
-            <Button
-              title="고객의 목소리를 들려주세요"
-              onPress={() => Alert.alert('고객 문의 리스트')}></Button>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+              <View>
+                <Text style={{textAlign: 'center'}}></Text>
+              </View>
+              <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+            </View>
+            <View style={{borderWidth: 1, borderRadius: 4}}>
+              <Pressable
+                // onPress={() => Alert.alert('Login Button pressed')}
+                style={({pressed}) => [
+                  {
+                    backgroundColor: pressed ? 'white' : 'rgb(210, 230, 255)',
+                  },
+                  {
+                    borderRadius: 8,
+                    padding: 6,
+                  },
+                ]}>
+                {({pressed}) => (
+                  <Text>
+                    {pressed
+                      ? '고객의 목소리함으로 이동중...'
+                      : '고객의 목소리를 들려주세요'}
+                  </Text>
+                )}
+              </Pressable>
+            </View>
           </View>
         </View>
       </View>

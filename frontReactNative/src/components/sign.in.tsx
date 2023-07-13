@@ -1,8 +1,7 @@
 import {
-  Alert,
-  Button,
   Dimensions,
   Linking,
+  Pressable,
   Text,
   TextInput,
   View,
@@ -40,7 +39,7 @@ const SignIn = () => {
           }}>
           <Text
             style={{
-              paddingVertical: 20,
+              paddingVertical: 24,
               fontSize: 27,
               fontStyle: 'normal',
               fontWeight: '400',
@@ -49,7 +48,6 @@ const SignIn = () => {
             }}>
             Login
           </Text>
-
           <View
             style={{
               display: 'flex',
@@ -57,19 +55,29 @@ const SignIn = () => {
               justifyContent: 'center',
               alignItems: 'center',
               padding: 0,
-              gap: 10,
+              gap: 6,
               width: 200,
               height: 150,
             }}>
             <View style={{width: '100%'}}>
               <TextInput
-                style={{borderWidth: 1, width: '100%', borderRadius: 4}}
+                style={{
+                  borderWidth: 1,
+                  width: '100%',
+                  height: 40,
+                  borderRadius: 4,
+                }}
                 placeholder=" 아이디를 입력하세요."
               />
             </View>
             <View style={{width: '100%'}}>
               <TextInput
-                style={{borderWidth: 1, width: '100%', borderRadius: 4}}
+                style={{
+                  borderWidth: 1,
+                  width: '100%',
+                  height: 40,
+                  borderRadius: 4,
+                }}
                 placeholder=" 비밀번호를 입력하세요."
               />
             </View>
@@ -78,10 +86,21 @@ const SignIn = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}>
-              <Button
-                title="로그인"
-                onPress={() => Alert.alert('Login Button pressed')}
-              />
+              <Pressable
+                // onPress={() => Alert.alert('Login Button pressed')}
+                style={({pressed}) => [
+                  {
+                    backgroundColor: pressed ? 'white' : 'rgb(210, 230, 255)',
+                  },
+                  {
+                    borderRadius: 8,
+                    padding: 6,
+                  },
+                ]}>
+                {({pressed}) => (
+                  <Text>{pressed ? '로그인 중...' : '로그인'}</Text>
+                )}
+              </Pressable>
             </View>
             <View>
               <Text style={{fontSize: 12}}>
