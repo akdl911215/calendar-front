@@ -1,7 +1,15 @@
-import {Alert, Button, Dimensions, Text, TextInput, View} from 'react-native';
+import {
+  Alert,
+  Button,
+  Dimensions,
+  Linking,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
-const VIEW_HEIGHT: number = height / 1.6;
+const VIEW_HEIGHT: number = height / 2.2;
 const VIEW_WIDTH = width / 1.3;
 
 const SignIn = () => {
@@ -13,10 +21,10 @@ const SignIn = () => {
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: '#ffffff',
+          height: '100%',
         }}>
         <View
           style={{
-            top: '10%',
             alignItems: 'center',
             backgroundColor: '#ffffff',
             width: VIEW_WIDTH,
@@ -32,7 +40,8 @@ const SignIn = () => {
           }}>
           <Text
             style={{
-              fontSize: 35,
+              paddingVertical: 20,
+              fontSize: 27,
               fontStyle: 'normal',
               fontWeight: '400',
               letterSpacing: 0.2,
@@ -40,40 +49,57 @@ const SignIn = () => {
             }}>
             Login
           </Text>
-        </View>
 
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 0,
-            gap: 20,
-
-            width: 200,
-            height: 150,
-            // alignSelf: 'stretch',
-          }}>
-          <View style={{}}>
-            <TextInput>ID</TextInput>
-          </View>
-          <View>
-            <TextInput>PASSWORD</TextInput>
-          </View>
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 0,
+              gap: 10,
+              width: 200,
+              height: 150,
             }}>
-            <Button
-              title="로그인"
-              onPress={() => Alert.alert('Login Button pressed')}
-            />
-            <Button
-              title="돌아가기"
-              color="#f194ff"
-              onPress={() => Alert.alert('Return Button pressed')}></Button>
+            <View style={{width: '100%'}}>
+              <TextInput
+                style={{borderWidth: 1, width: '100%', borderRadius: 4}}
+                placeholder=" 아이디를 입력하세요."
+              />
+            </View>
+            <View style={{width: '100%'}}>
+              <TextInput
+                style={{borderWidth: 1, width: '100%', borderRadius: 4}}
+                placeholder=" 비밀번호를 입력하세요."
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Button
+                title="로그인"
+                onPress={() => Alert.alert('Login Button pressed')}
+              />
+            </View>
+            <View>
+              <Text style={{fontSize: 12}}>
+                Don't have an account?
+                <Text
+                  style={{color: 'blue'}}
+                  onPress={() => Linking.openURL('')}>
+                  Sign up
+                </Text>
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+              <View>
+                <Text style={{width: 50, textAlign: 'center'}}>SNS</Text>
+              </View>
+              <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+            </View>
           </View>
         </View>
       </View>
