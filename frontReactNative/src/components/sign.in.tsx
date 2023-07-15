@@ -1,9 +1,11 @@
 import {
+  Button,
   Dimensions,
   Linking,
   Pressable,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
