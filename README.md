@@ -27,7 +27,12 @@ Skill Speccification: Rect Native
 
 
 <br><br>
-- 과제
+- 할일
 <br><br>
 <img width="385" alt="스크린샷 2023-06-25 오전 11 31 25" src="https://github.com/akdl911215/calendar-front/assets/76759835/9ebba534-916c-4e5a-8f9d-a3882571ad09">
+
+<br><br>
+- 내 정보
+<br><br>
+![스크린샷 2023-07-17 오후 9 08 04](https://github.com/akdl911215/calendar-front/assets/76759835/23796b48-e34f-4905-9e97-01830559d6ef)
 
