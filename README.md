@@ -1,7 +1,7 @@
 # calendar-front
 
 <br><br>
-서버: http://15.164.39.69:9595/docs#/
+서버: [http://15.164.39.69:9595/docs#/](http://3.35.136.100:9595/docs)
 <br><br>
 Skill Speccification: Rect Native
 <br><br>
