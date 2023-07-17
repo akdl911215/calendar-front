@@ -12,6 +12,7 @@ import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 
 import {RootBottomTabParamList} from '../../App';
 import {todoMockList} from '_common/todo.mock.data';
+import {TodoListInquiryAPI} from '../api/todo.list.api';
 
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
 export type TodoType = Readonly<{
@@ -49,6 +50,8 @@ const TodoList: React.FC<TodoListProps> = () => {
   useEffect(() => {
     setMonth(5);
     setCurrentTimeStamp(1685329441085);
+
+    // TodoListInquiryAPI();
   }, []);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {type RootBottomTabParamList} from '../../App';
 import SignIn from '../components/sign.in';

@@ -61,8 +61,9 @@ const Profile = () => {
                   width: '100%',
                   height: 40,
                   borderRadius: 4,
+                  paddingLeft: 3,
                 }}
-                placeholder=" 아이디"
+                placeholder="아이디"
               />
             </View>
             <View style={{width: '100%'}}>
@@ -72,8 +73,9 @@ const Profile = () => {
                   width: '100%',
                   height: 40,
                   borderRadius: 4,
+                  paddingLeft: 3,
                 }}
-                placeholder=" 닉네임"
+                placeholder="닉네임"
               />
             </View>
             <View style={{width: '100%'}}>
@@ -83,8 +85,9 @@ const Profile = () => {
                   width: '100%',
                   height: 40,
                   borderRadius: 4,
+                  paddingLeft: 3,
                 }}
-                placeholder=" 핸드폰"
+                placeholder="핸드폰"
               />
             </View>
             <View
