@@ -11,7 +11,7 @@ import CheckBox from '@react-native-community/checkbox';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 
 import {RootBottomTabParamList} from '../../App';
-import {todoMockList} from '_common/todo.mock.data';
+import {TodoListInquiryAPI} from '../api/todo.list.api';
 
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
 export type TodoType = Readonly<{
@@ -33,8 +33,7 @@ const VIEW_HEIGHT: number = height / 3;
 const GAP = width / 30;
 
 const TodoList: React.FC<TodoListProps> = () => {
-  const [apiInitialState, setApiInitialState] =
-    useState<TodoType[]>(todoMockList);
+  const [apiInitialState, setApiInitialState] = useState<TodoType[]>([]);
 
   const TodoListTypeArr: TodoType[] = [];
   const [previous, setPrevious] = useState<TodoType[]>(TodoListTypeArr);
@@ -49,6 +48,10 @@ const TodoList: React.FC<TodoListProps> = () => {
   useEffect(() => {
     setMonth(5);
     setCurrentTimeStamp(1685329441085);
+
+    TodoListInquiryAPI()
+      .then(res => setApiInitialState(res.data.response.inquiryList))
+      .catch(err => console.error(err));
   }, []);
 
   useEffect(() => {

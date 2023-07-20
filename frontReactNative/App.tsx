@@ -28,6 +28,8 @@ import MyPage from './src/screens/my.page';
 import {SvgIcon} from './src/components/svg.icon';
 import TodoList from './src/screens/todo.list';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {RecoilRoot} from 'recoil';
+import {useEffect} from 'react';
 
 export type RootBottomTabParamList = {
   달력: undefined;
@@ -41,7 +43,11 @@ type handleBottomTabRoute = (props: {
 
 const BottomTab = createBottomTabNavigator<RootBottomTabParamList>();
 
-function App(): JSX.Element {
+const App = (): JSX.Element => {
+  useEffect(() => {
+    // profile 처음 렌더링되면 보내는 api
+  }, []);
+
   const isDark = useColorScheme() === 'dark';
   const {colors} = useTheme();
   const handleBottomTabRoute: handleBottomTabRoute = ({route}) => ({
@@ -68,28 +74,30 @@ function App(): JSX.Element {
   const str = 'Hello Box';
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView
-        style={{
-          flex: 1,
-          backgroundColor: colors.background,
-        }}>
-        <View style={styles.commonBox}>
-          <View style={styles.advertisingBox}>
-            <Text>{str}</Text>
+    <RecoilRoot>
+      <SafeAreaProvider>
+        <SafeAreaView
+          style={{
+            flex: 1,
+            backgroundColor: colors.background,
+          }}>
+          <View style={styles.commonBox}>
+            <View style={styles.advertisingBox}>
+              <Text>{str}</Text>
+            </View>
           </View>
-        </View>
-        <NavigationContainer theme={isDark ? DarkTheme : DefaultTheme}>
-          <BottomTab.Navigator screenOptions={handleBottomTabRoute}>
-            <BottomTab.Screen name="달력" component={Calendar} />
-            <BottomTab.Screen name="할일" component={TodoList} />
-            <BottomTab.Screen name="내정보" component={MyPage} />
-          </BottomTab.Navigator>
-        </NavigationContainer>
-      </SafeAreaView>
-    </SafeAreaProvider>
+          <NavigationContainer theme={isDark ? DarkTheme : DefaultTheme}>
+            <BottomTab.Navigator screenOptions={handleBottomTabRoute}>
+              <BottomTab.Screen name="달력" component={Calendar} />
+              <BottomTab.Screen name="할일" component={TodoList} />
+              <BottomTab.Screen name="내정보" component={MyPage} />
+            </BottomTab.Navigator>
+          </NavigationContainer>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </RecoilRoot>
   );
-}
+};
 
 const styles = StyleSheet.create({
   advertisingBox: {

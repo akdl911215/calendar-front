@@ -1,6 +1,8 @@
 # calendar-front
 
-<br>
+<br><br>
+서버: [http://15.164.39.69:9595/docs#/](http://3.35.136.100:9595/docs)
+<br><br>
 Skill Speccification: Rect Native
 <br><br>
 협업 코드 컨벤션: https://calendar1215.atlassian.net/l/cp/6SteoQ01
@@ -21,7 +23,16 @@ Skill Speccification: Rect Native
 <br><br>
 - 캘린더
 <br><br>
+<img width="385" alt="스크린샷 2023-06-25 오전 11 31 03" src="https://github.com/akdl911215/calendar-front/assets/76759835/39892481-2a0a-4265-86d7-1027d0a9a0e0">
+
 
 <br><br>
-- 과제
+- 할일
 <br><br>
+<img width="385" alt="스크린샷 2023-06-25 오전 11 31 25" src="https://github.com/akdl911215/calendar-front/assets/76759835/9ebba534-916c-4e5a-8f9d-a3882571ad09">
+
+<br><br>
+- 내 정보
+<br><br>
+![스크린샷 2023-07-17 오후 9 08 04](https://github.com/akdl911215/calendar-front/assets/76759835/23796b48-e34f-4905-9e97-01830559d6ef)
+

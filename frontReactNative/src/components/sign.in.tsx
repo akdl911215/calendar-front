@@ -1,4 +1,5 @@
 import {
+  Alert,
   Dimensions,
   Linking,
   Pressable,
@@ -6,12 +7,68 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import {useState} from 'react';
+import {SignInDataAPI} from '../api/user.api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSetRecoilState} from 'recoil';
+import {userModelState} from '../atoms/users.atoms';
 
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 2.2;
 const VIEW_WIDTH = width / 1.3;
 
+interface UserType {
+  readonly id: string;
+  readonly appId: string;
+  readonly nickname: string;
+  readonly phone: string;
+  readonly accessToken: string;
+  readonly refreshToken: string;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
+  readonly deletedAt: null | Date;
+}
+
 const SignIn = () => {
+  const [signIn, setSignIn] = useState({
+    appId: '',
+    password: '',
+  });
+  const {appId, password} = signIn;
+  const setUserModel = useSetRecoilState(userModelState);
+
+  const handleChange = (event: {name: string; value: string}): void => {
+    const {name, value} = event;
+
+    setSignIn({
+      ...signIn,
+      [name]: value.toLowerCase(),
+    });
+  };
+
+  const signInButton = async () => {
+    if (appId === '' || password === '') {
+      Alert.alert('아이디 또는 비밀번호를 입력해주세요.');
+      return;
+    }
+
+    const {data} = await SignInDataAPI(signIn);
+
+    try {
+      const {response} = data;
+      const userJsonResponse: UserType = response;
+      setUserModel(userJsonResponse);
+
+      const at: string = userJsonResponse.accessToken;
+      const rt: string = userJsonResponse.refreshToken;
+
+      await AsyncStorage.setItem('access_token', at);
+      await AsyncStorage.setItem('refresh_token', rt);
+    } catch (e: any) {
+      console.error(e);
+    }
+  };
+
   return (
     <>
       <View
@@ -66,8 +123,10 @@ const SignIn = () => {
                   width: '100%',
                   height: 40,
                   borderRadius: 4,
+                  paddingLeft: 3,
                 }}
-                placeholder=" 아이디를 입력하세요."
+                placeholder="아이디를 입력하세요."
+                onChangeText={value => handleChange({name: 'appId', value})}
               />
             </View>
             <View style={{width: '100%'}}>
@@ -77,8 +136,12 @@ const SignIn = () => {
                   width: '100%',
                   height: 40,
                   borderRadius: 4,
+                  paddingLeft: 3,
                 }}
-                placeholder=" 비밀번호를 입력하세요."
+                textContentType="password"
+                placeholder="비밀번호를 입력하세요."
+                secureTextEntry={true}
+                onChangeText={value => handleChange({name: 'password', value})}
               />
             </View>
             <View
@@ -96,7 +159,8 @@ const SignIn = () => {
                     borderRadius: 8,
                     padding: 6,
                   },
-                ]}>
+                ]}
+                onPress={signInButton}>
                 {({pressed}) => (
                   <Text>{pressed ? '로그인 중...' : '로그인'}</Text>
                 )}
