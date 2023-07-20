@@ -2,8 +2,9 @@ import {View} from 'react-native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {type RootBottomTabParamList} from '../../App';
 import SignIn from '../components/sign.in';
-import {useState} from 'react';
 import Profile from '../components/profile';
+import {useRecoilValue} from 'recoil';
+import {userModelState} from '../atoms/users.atoms';
 
 type MyInformationProps = BottomTabScreenProps<
   RootBottomTabParamList,
@@ -11,8 +12,8 @@ type MyInformationProps = BottomTabScreenProps<
 >;
 
 const MyPage: React.FC<MyInformationProps> = () => {
-  const [state, setState] = useState<boolean>(true);
-  return <View>{state === true ? <SignIn /> : <Profile />}</View>;
+  const usersModel = useRecoilValue(userModelState);
+  return <View>{!!usersModel === true ? <Profile /> : <SignIn />}</View>;
 };
 
 export default MyPage;

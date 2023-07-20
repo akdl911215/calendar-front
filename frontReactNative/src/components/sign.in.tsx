@@ -10,6 +10,8 @@ import {
 import {useState} from 'react';
 import {SignInDataAPI} from '../api/user.api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSetRecoilState} from 'recoil';
+import {userModelState} from '../atoms/users.atoms';
 
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 2.2;
@@ -33,13 +35,14 @@ const SignIn = () => {
     password: '',
   });
   const {appId, password} = signIn;
+  const setUserModel = useSetRecoilState(userModelState);
 
   const handleChange = (event: {name: string; value: string}): void => {
     const {name, value} = event;
 
     setSignIn({
       ...signIn,
-      [name]: value,
+      [name]: value.toLowerCase(),
     });
   };
 
@@ -54,13 +57,16 @@ const SignIn = () => {
     try {
       const {response} = data;
       const userJsonResponse: UserType = response;
-      await AsyncStorage.setItem('at-key', userJsonResponse.accessToken);
+      setUserModel(userJsonResponse);
+
+      const at: string = userJsonResponse.accessToken;
+      const rt: string = userJsonResponse.refreshToken;
+
+      await AsyncStorage.setItem('access_token', at);
+      await AsyncStorage.setItem('refresh_token', rt);
     } catch (e: any) {
       console.error(e);
     }
-
-    const atKey = await AsyncStorage.getItem('at-key');
-    console.log('111', atKey);
   };
 
   return (
