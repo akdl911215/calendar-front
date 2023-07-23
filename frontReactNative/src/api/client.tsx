@@ -34,7 +34,7 @@ CLIENT.interceptors.request.use(
 CLIENT.interceptors.response.use(
   response => response,
   async error => {
-    const {refreshToken} = error.conig.headers;
+    const {refreshToken} = error.config.headers;
 
     if (error.response && error.response.status === 401) {
       try {

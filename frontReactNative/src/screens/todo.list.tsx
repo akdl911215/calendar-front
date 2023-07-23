@@ -11,7 +11,11 @@ import CheckBox from '@react-native-community/checkbox';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 
 import {RootBottomTabParamList} from '../../App';
-import {TodoListInquiryAPI} from '../api/todo.list.api';
+import {TodoListAPI} from '../api/todo.list.api';
+import {DATE_MONTH} from '../_common/get.date';
+import {useRecoilValue} from 'recoil';
+import {userModelState} from '../atoms/users.atoms';
+import {useIsFocused} from '@react-navigation/native';
 
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
 export type TodoType = Readonly<{
@@ -33,7 +37,9 @@ const VIEW_HEIGHT: number = height / 3;
 const GAP = width / 30;
 
 const TodoList: React.FC<TodoListProps> = () => {
+  const isFocused = useIsFocused();
   const [apiInitialState, setApiInitialState] = useState<TodoType[]>([]);
+  // const usersModel = useRecoilValue(userModelState);
 
   const TodoListTypeArr: TodoType[] = [];
   const [previous, setPrevious] = useState<TodoType[]>(TodoListTypeArr);
@@ -46,13 +52,27 @@ const TodoList: React.FC<TodoListProps> = () => {
   }
 
   useEffect(() => {
-    setMonth(5);
-    setCurrentTimeStamp(1685329441085);
+    if (isFocused === true) {
+      setMonth(5);
+      setCurrentTimeStamp(1685329441085);
 
-    TodoListInquiryAPI()
-      .then(res => setApiInitialState(res.data.response.inquiryList))
-      .catch(err => console.error(err));
-  }, []);
+      // TodoListInquiryAPI()
+      //   .then(res => setApiInitialState(res.data.response.inquiryList))
+      //   .catch(err => console.error(err));
+
+      console.log('TodoListAPI start');
+      TodoListAPI(DATE_MONTH)
+        .then(res => console.log('res : ', res))
+        .catch(err => console.error(err));
+    }
+  }, [isFocused]);
+
+  // useEffect(() => {
+  //   console.log('TodoListAPI start');
+  //   TodoListAPI(DATE_MONTH)
+  //     .then(res => console.log(res))
+  //     .catch(err => console.error(err));
+  // }, [usersModel]);
 
   useEffect(() => {
     const previousArr = [];

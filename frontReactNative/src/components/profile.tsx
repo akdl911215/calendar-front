@@ -1,10 +1,14 @@
 import {Dimensions, Pressable, Text, TextInput, View} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSetRecoilState} from 'recoil';
+import {userModelState} from '../atoms/users.atoms';
 
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 2;
 const VIEW_WIDTH = width / 1.3;
 
 const Profile = () => {
+  const setUserModel = useSetRecoilState(userModelState);
   return (
     <>
       <View
@@ -137,6 +141,30 @@ const Profile = () => {
                     {pressed
                       ? '고객의 목소리함으로 이동중...'
                       : '고객의 목소리를 들려주세요'}
+                  </Text>
+                )}
+              </Pressable>
+            </View>
+            <View>
+              <Pressable
+                // onPress={() => Alert.alert('Login Button pressed')}
+                style={({pressed}) => [
+                  {
+                    backgroundColor: pressed ? 'white' : 'rgb(210, 230, 255)',
+                  },
+                  {
+                    borderRadius: 8,
+                    padding: 6,
+                  },
+                ]}
+                onPress={async () => {
+                  await AsyncStorage.removeItem('access_token');
+                  await AsyncStorage.removeItem('refresh_token');
+                  setUserModel({});
+                }}>
+                {({pressed}) => (
+                  <Text>
+                    {pressed ? '임시 로그아웃 버튼' : '로그아웃 진행중 ...'}
                   </Text>
                 )}
               </Pressable>

@@ -13,7 +13,8 @@ type MyInformationProps = BottomTabScreenProps<
 
 const MyPage: React.FC<MyInformationProps> = () => {
   const usersModel = useRecoilValue(userModelState);
-  return <View>{!!usersModel === true ? <Profile /> : <SignIn />}</View>;
+  const modelLengthZero: number = Object.keys(usersModel).length;
+  return <View>{modelLengthZero === 0 ? <SignIn /> : <Profile />}</View>;
 };
 
 export default MyPage;
