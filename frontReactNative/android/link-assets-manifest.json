@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/BMDOHYEON_ttf.ttf",
+      "sha1": "0e172deca3570d1aadcc86d07bf850c44507557a"
+    },
+    {
+      "path": "src/assets/fonts/fonts.ts",
+      "sha1": "b0192bc86342c1dd5e848aba8cdf59af28c5059a"
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import {DATE_MONTH} from '../_common/get.date';
 import {useRecoilValue} from 'recoil';
 import {userModelState} from '../atoms/users.atoms';
 import {useIsFocused} from '@react-navigation/native';
+import {Fonts} from '../assets/fonts/fonts';
 
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
 export type TodoType = Readonly<{
@@ -35,6 +36,7 @@ export type TodoType = Readonly<{
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 3;
 const GAP = width / 30;
+const FONT: string = Fonts.BMDOHYEON;
 
 const TodoList: React.FC<TodoListProps> = () => {
   const isFocused = useIsFocused();
@@ -53,26 +55,15 @@ const TodoList: React.FC<TodoListProps> = () => {
 
   useEffect(() => {
     if (isFocused === true) {
-      setMonth(5);
+      setMonth(apiInitialState[0]?.month);
       setCurrentTimeStamp(1685329441085);
-
-      // TodoListInquiryAPI()
-      //   .then(res => setApiInitialState(res.data.response.inquiryList))
-      //   .catch(err => console.error(err));
 
       console.log('TodoListAPI start');
       TodoListAPI(DATE_MONTH)
-        .then(res => console.log('res : ', res))
+        .then(res => setApiInitialState(res.data.response.monthList))
         .catch(err => console.error(err));
     }
   }, [isFocused]);
-
-  // useEffect(() => {
-  //   console.log('TodoListAPI start');
-  //   TodoListAPI(DATE_MONTH)
-  //     .then(res => console.log(res))
-  //     .catch(err => console.error(err));
-  // }, [usersModel]);
 
   useEffect(() => {
     const previousArr = [];
@@ -117,47 +108,55 @@ const TodoList: React.FC<TodoListProps> = () => {
       <View>
         <Text style={styles.title}>{month}월 중에 할 일</Text>
         <View style={styles.todoListRowContainer}>
-          <FlatList
-            data={previous}
-            renderItem={({item, index}: renderItemType) => (
-              <TouchableOpacity style={styles.todoListRow}>
-                <CheckBox
-                  value={previous[index].done}
-                  onValueChange={(value: boolean) =>
-                    rowChangeFunc({
-                      done: value,
-                      date: item.date,
-                      index,
-                    })
-                  }
-                />
-                <Text style={styles.todoListRowText}>{item.todo}</Text>
-              </TouchableOpacity>
-            )}
-          />
+          {previous.length === 0 ? (
+            <Text style={{fontFamily: FONT}}>할일을 찾을 수 없어요</Text>
+          ) : (
+            <FlatList
+              data={previous}
+              renderItem={({item, index}: renderItemType) => (
+                <TouchableOpacity style={styles.todoListRow}>
+                  <CheckBox
+                    value={previous[index].done}
+                    onValueChange={(value: boolean) =>
+                      rowChangeFunc({
+                        done: value,
+                        date: item.date,
+                        index,
+                      })
+                    }
+                  />
+                  <Text style={styles.todoListRowText}>{item.todo}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          )}
         </View>
       </View>
       <View>
         <Text style={styles.title}>{month}월 중에 지난 일</Text>
         <View style={styles.todoListRowContainer}>
-          <FlatList
-            data={subsequent}
-            renderItem={({item, index}: renderItemType) => (
-              <TouchableOpacity style={styles.todoListRow}>
-                <CheckBox
-                  value={subsequent[index].done}
-                  onValueChange={(value: boolean) =>
-                    rowChangeFunc({
-                      done: value,
-                      date: item.date,
-                      index,
-                    })
-                  }
-                />
-                <Text style={styles.todoListRowText}>{item.todo}</Text>
-              </TouchableOpacity>
-            )}
-          />
+          {subsequent.length === 0 ? (
+            <Text style={{fontFamily: FONT}}>할일을 찾을 수 없어요.</Text>
+          ) : (
+            <FlatList
+              data={subsequent}
+              renderItem={({item, index}: renderItemType) => (
+                <TouchableOpacity style={styles.todoListRow}>
+                  <CheckBox
+                    value={subsequent[index].done}
+                    onValueChange={(value: boolean) =>
+                      rowChangeFunc({
+                        done: value,
+                        date: item.date,
+                        index,
+                      })
+                    }
+                  />
+                  <Text style={styles.todoListRowText}>{item.todo}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          )}
         </View>
       </View>
     </View>

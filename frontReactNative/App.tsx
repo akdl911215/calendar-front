@@ -29,7 +29,6 @@ import {SvgIcon} from './src/components/svg.icon';
 import TodoList from './src/screens/todo.list';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {RecoilRoot} from 'recoil';
-import {useEffect} from 'react';
 
 export type RootBottomTabParamList = {
   달력: undefined;
@@ -43,13 +42,10 @@ type handleBottomTabRoute = (props: {
 
 const BottomTab = createBottomTabNavigator<RootBottomTabParamList>();
 
-const App = (): JSX.Element => {
-  useEffect(() => {
-    // profile 처음 렌더링되면 보내는 api
-  }, []);
-
+const App = (): JSX.Element | null => {
   const isDark = useColorScheme() === 'dark';
   const {colors} = useTheme();
+
   const handleBottomTabRoute: handleBottomTabRoute = ({route}) => ({
     tabBarIcon: ({focused, color, size}) => {
       // focused 속성 사용하여 해당 탭 클릭시 아이콘 변경 가능

@@ -12,10 +12,12 @@ import {SignInDataAPI} from '../api/user.api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSetRecoilState} from 'recoil';
 import {userModelState} from '../atoms/users.atoms';
+import {Fonts} from '../assets/fonts/fonts';
 
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 2.2;
 const VIEW_WIDTH = width / 1.3;
+const FONT: string = Fonts.BMDOHYEON;
 
 interface UserType {
   readonly id: string;
@@ -98,7 +100,7 @@ const SignIn = () => {
             style={{
               paddingVertical: 24,
               fontSize: 27,
-              fontStyle: 'normal',
+              fontFamily: FONT,
               fontWeight: '400',
               letterSpacing: 0.2,
               color: '#29a19c',
@@ -124,6 +126,7 @@ const SignIn = () => {
                   height: 40,
                   borderRadius: 4,
                   paddingLeft: 3,
+                  fontFamily: FONT,
                 }}
                 placeholder="아이디를 입력하세요."
                 onChangeText={value => handleChange({name: 'appId', value})}
@@ -137,6 +140,7 @@ const SignIn = () => {
                   height: 40,
                   borderRadius: 4,
                   paddingLeft: 3,
+                  fontFamily: FONT,
                 }}
                 textContentType="password"
                 placeholder="비밀번호를 입력하세요."
@@ -162,15 +166,17 @@ const SignIn = () => {
                 ]}
                 onPress={signInButton}>
                 {({pressed}) => (
-                  <Text>{pressed ? '로그인 중...' : '로그인'}</Text>
+                  <Text style={{fontFamily: FONT}}>
+                    {pressed ? '로그인 중...' : '로그인'}
+                  </Text>
                 )}
               </Pressable>
             </View>
             <View>
-              <Text style={{fontSize: 12}}>
+              <Text style={{fontSize: 12, fontFamily: FONT}}>
                 Don't have an account?
                 <Text
-                  style={{color: 'blue'}}
+                  style={{color: 'blue', fontFamily: FONT}}
                   onPress={() => Linking.openURL('')}>
                   Sign up
                 </Text>
@@ -179,7 +185,10 @@ const SignIn = () => {
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
               <View>
-                <Text style={{width: 50, textAlign: 'center'}}>SNS</Text>
+                <Text
+                  style={{width: 50, textAlign: 'center', fontFamily: FONT}}>
+                  SNS
+                </Text>
               </View>
               <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
             </View>
