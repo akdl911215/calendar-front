@@ -12,7 +12,7 @@ import {SignInDataAPI} from '../api/user.api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSetRecoilState} from 'recoil';
 import {userModelState} from '../atoms/users.atoms';
-import {Fonts} from '../assets/fonts/fonts';
+import {Fonts} from '../../assets/fonts/fonts';
 
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 2.2;

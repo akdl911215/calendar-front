@@ -1,4 +1,4 @@
-import * as icons from 'assets/icons/index';
+import * as icons from '../../assets/icons/index';
 
 type SvgIconName = keyof typeof icons;
 
