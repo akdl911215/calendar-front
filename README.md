@@ -42,7 +42,7 @@ Skill Speccification: Rect Native
 <br><br>
 ### 내정보
 <br><br>
-로그인 화면
+- 로그인 화면
 <br><br>
 ![스크린샷 2023-07-28 오후 2 42 37](https://github.com/akdl911215/calendar-front/assets/76759835/d8951f79-5873-4482-bea2-1a344dbbbe39)
 
