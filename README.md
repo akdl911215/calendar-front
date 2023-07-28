@@ -29,10 +29,19 @@ Skill Speccification: Rect Native
 <br><br>
 - 할일
 <br><br>
-<img width="385" alt="스크린샷 2023-06-25 오전 11 31 25" src="https://github.com/akdl911215/calendar-front/assets/76759835/9ebba534-916c-4e5a-8f9d-a3882571ad09">
+빈리스트일 경우
+![스크린샷 2023-07-28 오후 2 43 36](https://github.com/akdl911215/calendar-front/assets/76759835/5dca8e3d-a4f2-4335-80fb-06f5ccc821a9)
 
 <br><br>
-- 내 정보
+리스트가 존재할 경우
+![스크린샷 2023-07-28 오후 2 42 55](https://github.com/akdl911215/calendar-front/assets/76759835/4d969c3a-7549-4763-bac8-f228329deee9)
+
+
 <br><br>
-![스크린샷 2023-07-17 오후 9 08 04](https://github.com/akdl911215/calendar-front/assets/76759835/23796b48-e34f-4905-9e97-01830559d6ef)
+- 내정보
+<br><br>
+로그인 화면
+<br><br>
+![스크린샷 2023-07-28 오후 2 42 37](https://github.com/akdl911215/calendar-front/assets/76759835/d8951f79-5873-4482-bea2-1a344dbbbe39)
+
 
