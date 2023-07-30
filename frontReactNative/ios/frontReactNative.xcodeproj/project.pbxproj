@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* frontReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* frontReactNativeTests.m */; };
 		0C80B921A6F3F58F76C31292 /* libPods-frontReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-frontReactNative.a */; };
+		121A238E2A6EA888009015FA /* frontReactNative in Resources */ = {isa = PBXBuildFile; fileRef = 121A238D2A6EA888009015FA /* frontReactNative */; };
+		121A23902A6EA931009015FA /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 121A238F2A6EA931009015FA /* fonts */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		49FFD5F58AEC4AB184D3F26A /* fonts.ts in Resources */ = {isa = PBXBuildFile; fileRef = D508C9F8F7024AB19461E106 /* fonts.ts */; };
 		7699B88040F8A987B510C191 /* libPods-frontReactNative-frontReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-frontReactNative-frontReactNativeTests.a */; };
+		7AF9F9E9A3A649A689C9A95D /* BMDOHYEON_ttf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2548DCCCA85A44E29F702703 /* BMDOHYEON_ttf.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +34,8 @@
 		00E356EE1AD99517003FC87E /* frontReactNativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = frontReactNativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* frontReactNativeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = frontReactNativeTests.m; sourceTree = "<group>"; };
+		121A238D2A6EA888009015FA /* frontReactNative */ = {isa = PBXFileReference; lastKnownFileType = folder; path = frontReactNative; sourceTree = "<group>"; };
+		121A238F2A6EA931009015FA /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* frontReactNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = frontReactNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = frontReactNative/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = frontReactNative/AppDelegate.mm; sourceTree = "<group>"; };
@@ -37,12 +43,14 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = frontReactNative/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = frontReactNative/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-frontReactNative-frontReactNativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-frontReactNative-frontReactNativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2548DCCCA85A44E29F702703 /* BMDOHYEON_ttf.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BMDOHYEON_ttf.ttf; path = ../assets/fonts/BMDOHYEON_ttf.ttf; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-frontReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontReactNative.debug.xcconfig"; path = "Target Support Files/Pods-frontReactNative/Pods-frontReactNative.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-frontReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontReactNative.release.xcconfig"; path = "Target Support Files/Pods-frontReactNative/Pods-frontReactNative.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-frontReactNative-frontReactNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontReactNative-frontReactNativeTests.debug.xcconfig"; path = "Target Support Files/Pods-frontReactNative-frontReactNativeTests/Pods-frontReactNative-frontReactNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-frontReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-frontReactNative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = frontReactNative/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-frontReactNative-frontReactNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontReactNative-frontReactNativeTests.release.xcconfig"; path = "Target Support Files/Pods-frontReactNative-frontReactNativeTests/Pods-frontReactNative-frontReactNativeTests.release.xcconfig"; sourceTree = "<group>"; };
+		D508C9F8F7024AB19461E106 /* fonts.ts */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = fonts.ts; path = ../assets/fonts/fonts.ts; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -83,6 +91,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		13985975BC80499F9C4A149F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2548DCCCA85A44E29F702703 /* BMDOHYEON_ttf.ttf */,
+				D508C9F8F7024AB19461E106 /* fonts.ts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* frontReactNative */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,12 +133,15 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				121A238F2A6EA931009015FA /* fonts */,
 				13B07FAE1A68108700A75B9A /* frontReactNative */,
+				121A238D2A6EA888009015FA /* frontReactNative */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* frontReactNativeTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				13985975BC80499F9C4A149F /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -244,6 +264,10 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				121A23902A6EA931009015FA /* fonts in Resources */,
+				121A238E2A6EA888009015FA /* frontReactNative in Resources */,
+				7AF9F9E9A3A649A689C9A95D /* BMDOHYEON_ttf.ttf in Resources */,
+				49FFD5F58AEC4AB184D3F26A /* fonts.ts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
