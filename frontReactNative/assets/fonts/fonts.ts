@@ -1,3 +1,5 @@
+import {Platform} from 'react-native';
+
 export const Fonts = {
-  BMDOHYEON: 'BMDOHYEON',
+  BMDOHYEON: Platform.OS === 'ios' ? 'BMDOHYEON' : 'BMDOHYEON_ttf',
 };

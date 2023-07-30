@@ -2,6 +2,7 @@ import {
   Alert,
   Dimensions,
   Linking,
+  Platform,
   Pressable,
   Text,
   TextInput,
@@ -41,6 +42,8 @@ const SignIn = () => {
 
   const handleChange = (event: {name: string; value: string}): void => {
     const {name, value} = event;
+
+    console.log(`name: ${name}, value: ${value}`);
 
     setSignIn({
       ...signIn,
@@ -140,7 +143,11 @@ const SignIn = () => {
                   height: 40,
                   borderRadius: 4,
                   paddingLeft: 3,
-                  fontFamily: FONT,
+                  // fontFamily: signIn.password
+                  //   ? Platform.OS === 'ios'
+                  //     ? undefined
+                  //     : 'inherit'
+                  //   : FONT,
                 }}
                 textContentType="password"
                 placeholder="비밀번호를 입력하세요."
