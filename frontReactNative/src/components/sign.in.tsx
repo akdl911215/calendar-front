@@ -43,8 +43,6 @@ const SignIn = () => {
   const handleChange = (event: {name: string; value: string}): void => {
     const {name, value} = event;
 
-    console.log(`name: ${name}, value: ${value}`);
-
     setSignIn({
       ...signIn,
       [name]: value.toLowerCase(),
