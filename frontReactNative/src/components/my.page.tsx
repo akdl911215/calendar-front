@@ -23,7 +23,7 @@ const MyPage = () => {
         }}>
         <View
           style={{
-            backgroundColor: '#ffffff',
+            backgroundColor: '#272829',
             height: height / 17,
             display: 'flex',
             flexDirection: 'row',
@@ -32,7 +32,6 @@ const MyPage = () => {
           <View>
             <View
               style={{
-                backgroundColor: menubar ? '#FF99CC' : '#ffffff',
                 width: 140,
                 height: '100%',
                 alignItems: 'center',
@@ -44,7 +43,7 @@ const MyPage = () => {
                   paddingTop: 8,
                   fontSize: 20,
                   letterSpacing: 0.4,
-                  color: '#29a19c',
+                  color: menubar ? '#F5F5F5' : '#9E9FA5',
                   fontFamily: FONT,
                 }}>
                 Profile
@@ -55,7 +54,6 @@ const MyPage = () => {
             <View>
               <View
                 style={{
-                  backgroundColor: menubar ? '#ffffff' : '#FF99CC',
                   width: 140,
                   height: '100%',
                   alignItems: 'center',
@@ -67,7 +65,7 @@ const MyPage = () => {
                     paddingTop: 8,
                     fontSize: 20,
                     letterSpacing: 0.4,
-                    color: '#29a19c',
+                    color: menubar ? '#9E9FA5' : '#F5F5F5',
                     fontFamily: FONT,
                   }}>
                   고객의 소리함
@@ -79,7 +77,7 @@ const MyPage = () => {
 
         <View style={{paddingVertical: 10}}></View>
 
-        <View style={{backgroundColor: '#ffffff', height: VIEW_HEIGHT}}>
+        <View style={{backgroundColor: '#272829', height: VIEW_HEIGHT}}>
           {menubar ? <Profile /> : <CustomersVoice />}
         </View>
       </View>
