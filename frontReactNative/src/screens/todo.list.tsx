@@ -207,7 +207,6 @@ const styles = StyleSheet.create({
   },
   todoListEmptyText: {
     fontFamily: FONT,
-    position: 'absolute',
     alignSelf: 'center',
     fontSize: 20,
   },
