@@ -54,6 +54,8 @@ const Profile = () => {
               fontFamily: FONT,
               paddingLeft: 8,
             }}
+            placeholder="ID"
+            placeholderTextColor="#999999"
           />
         </View>
         <View style={{marginTop: 5, width: '100%', alignItems: 'center'}}>
@@ -80,6 +82,8 @@ const Profile = () => {
               paddingLeft: 8,
               fontFamily: FONT,
             }}
+            placeholder="Nickname"
+            placeholderTextColor="#999999"
           />
         </View>
         <View style={{marginTop: 5, width: '100%', alignItems: 'center'}}>
@@ -106,6 +110,90 @@ const Profile = () => {
               borderColor: '#999999',
               paddingLeft: 8,
             }}
+            placeholder="Phone"
+            placeholderTextColor="#999999"
+          />
+        </View>
+        <View style={{marginTop: 5, width: '100%', alignItems: 'center'}}>
+          <Text
+            style={{
+              width: '100%',
+              textAlign: 'left',
+              marginLeft: 15,
+              fontSize: 18,
+              fontFamily: FONT,
+              fontWeight: '600',
+              marginVertical: 1,
+              color: '#EEEEEE',
+            }}>
+            E-mail
+          </Text>
+          <TextInput
+            style={{
+              borderWidth: 2,
+              fontFamily: FONT,
+              width: '100%',
+              height: 40,
+              borderRadius: 10,
+              borderColor: '#999999',
+              paddingLeft: 8,
+            }}
+            placeholder="E-mail"
+            placeholderTextColor="#999999"
+          />
+        </View>
+        <Pressable
+          style={({pressed}) => [
+            {
+              backgroundColor: pressed ? '#999999' : '#CCCCCC',
+            },
+            {
+              borderRadius: 10,
+              padding: 6,
+            },
+          ]}>
+          {({pressed}) => (
+            <Text style={{fontFamily: FONT, color: '#EEEEEE'}}>
+              {pressed ? '전송 중...' : '수정 전송'}
+            </Text>
+          )}
+        </Pressable>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginVertical: 10,
+          }}>
+          <View style={{flex: 1, height: 1, backgroundColor: '#EEEEEE'}} />
+        </View>
+
+        <View style={{marginTop: 5, width: '100%', alignItems: 'center'}}>
+          <Text
+            style={{
+              width: '100%',
+              textAlign: 'left',
+              marginLeft: 15,
+              fontSize: 18,
+              fontFamily: FONT,
+              fontWeight: '600',
+              marginVertical: 1,
+              color: '#EEEEEE',
+            }}>
+            개선되면 좋은점을 이야기해요!
+          </Text>
+          <TextInput
+            style={{
+              borderWidth: 2,
+              fontFamily: FONT,
+              width: '100%',
+              height: 40,
+              borderRadius: 10,
+              borderColor: '#999999',
+              paddingLeft: 8,
+            }}
+            placeholder="하고 싶은 이야기!"
+            placeholderTextColor="#999999"
           />
         </View>
         <Pressable
