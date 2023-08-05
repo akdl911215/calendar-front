@@ -19,7 +19,10 @@ import {Fonts} from '../../assets/fonts/fonts';
 type TodoListProps = BottomTabScreenProps<RootBottomTabParamList, '할일'>;
 export type TodoType = Readonly<{
   id: string;
-  authorId: string;
+  appId: string;
+  nickname: string;
+  email: string;
+  phone: string;
   date: number;
   todo: string;
   done: boolean;
@@ -27,7 +30,7 @@ export type TodoType = Readonly<{
   month: number;
   day: number;
   createdAt: Date;
-  updatedAt: Date | null;
+  updatedAt: Date;
   deletedAt: Date | null;
 }>;
 
