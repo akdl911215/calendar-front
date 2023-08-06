@@ -3,19 +3,12 @@ import {useState} from 'react';
 import {FlatList, View, StyleSheet, Dimensions} from 'react-native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 // import {Calendar} from 'components/Calendar/Calendar';
-import {
-  Calendar,
-  CalendarProvider,
-  LocaleConfig,
-  WeekCalendar,
-} from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
 import {type RootBottomTabParamList} from '../../App';
-import {TodoType} from './todo.list';
 import ToDo from 'components/to.do';
 import CalendarModal from 'components/calendar.modal';
 import {useKeyboard} from 'hooks/useKeyboard';
 import TodoViewModal from 'components/todo.view.modal';
-import {DATE} from '../_common/get.date';
 import {todoMockList} from '_common/todo.mock.data';
 
 type CalendarProps = BottomTabScreenProps<RootBottomTabParamList, '달력'>;

@@ -1,18 +1,18 @@
 import {
+  Alert,
   Dimensions,
   Pressable,
   ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSetRecoilState} from 'recoil';
 import {userModelState} from '../atoms/users.atoms';
 import {Fonts} from '../../assets/fonts/fonts';
 import {useEffect, useState} from 'react';
-import {InquiryDataAPI} from '../api/user.api';
-import {TodoType} from '../screens/todo.list';
+import {InquiryDataAPI, UpdateDataAPI} from '../api/user.api';
 import {DATE} from '../_common/get.date';
 
 const {height, width} = Dimensions.get('window');
@@ -39,6 +39,7 @@ const Profile = () => {
     updatedAt: DATE,
     deletedAt: null,
   });
+  const [disable, setDisable] = useState<boolean>(false);
 
   const setUserModel = useSetRecoilState(userModelState);
 
@@ -56,131 +57,60 @@ const Profile = () => {
       .catch(err => console.error(err));
   }, []);
 
+  const updateButton = async () => {
+    if (
+      user.id === '' ||
+      user.appId === '' ||
+      user.nickname === '' ||
+      user.phone === ''
+    ) {
+      Alert.alert('수정할 정보를 확인해 주세요.');
+      return;
+    }
+
+    const {data} = await UpdateDataAPI({
+      id: user.id,
+      appId: user.appId,
+      phone: user.phone,
+      nickname: user.nickname,
+    });
+  };
+
   return (
     <>
       <ScrollView>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            paddingHorizontal: '10%',
-            gap: 10,
-          }}>
-          <View style={{marginTop: 18, width: '100%', alignItems: 'center'}}>
-            <Text
-              style={{
-                width: '100%',
-                textAlign: 'left',
-                marginLeft: 15,
-                fontSize: 18,
-                fontWeight: '600',
-                marginVertical: 1,
-                fontFamily: FONT,
-                color: '#EEEEEE',
-              }}>
-              ID
-            </Text>
+        <View style={styles.container}>
+          <View style={styles.box}>
+            <Text style={styles.textBox}>ID</Text>
             <TextInput
-              style={{
-                borderWidth: 2,
-                width: '100%',
-                height: 40,
-                borderRadius: 10,
-                borderColor: '#999999',
-                fontFamily: FONT,
-                paddingLeft: 8,
-                color: '#EEEEEE',
-              }}
+              style={styles.textInputBox}
               placeholder="ID"
               placeholderTextColor="#999999"
               value={user.appId}
             />
           </View>
-          <View style={{marginTop: 5, width: '100%', alignItems: 'center'}}>
-            <Text
-              style={{
-                width: '100%',
-                textAlign: 'left',
-                marginLeft: 15,
-                fontFamily: FONT,
-                fontSize: 18,
-                fontWeight: '600',
-                marginVertical: 1,
-                color: '#EEEEEE',
-              }}>
-              Nickname
-            </Text>
+          <View style={styles.box}>
+            <Text style={styles.textBox}>닉네임</Text>
             <TextInput
-              style={{
-                borderWidth: 2,
-                width: '100%',
-                height: 40,
-                borderRadius: 10,
-                borderColor: '#999999',
-                paddingLeft: 8,
-                fontFamily: FONT,
-                color: '#EEEEEE',
-              }}
+              style={styles.textInputBox}
               placeholder="Nickname"
               placeholderTextColor="#999999"
               value={user.nickname}
             />
           </View>
-          <View style={{marginTop: 5, width: '100%', alignItems: 'center'}}>
-            <Text
-              style={{
-                width: '100%',
-                textAlign: 'left',
-                marginLeft: 15,
-                fontSize: 18,
-                fontFamily: FONT,
-                fontWeight: '600',
-                marginVertical: 1,
-                color: '#EEEEEE',
-              }}>
-              Phone
-            </Text>
+          <View style={styles.box}>
+            <Text style={styles.textBox}>핸드폰</Text>
             <TextInput
-              style={{
-                borderWidth: 2,
-                fontFamily: FONT,
-                width: '100%',
-                height: 40,
-                borderRadius: 10,
-                borderColor: '#999999',
-                paddingLeft: 8,
-                color: '#EEEEEE',
-              }}
+              style={styles.textInputBox}
               placeholder="Phone"
               placeholderTextColor="#999999"
               value={user.phone}
             />
           </View>
-          <View style={{marginTop: 5, width: '100%', alignItems: 'center'}}>
-            <Text
-              style={{
-                width: '100%',
-                textAlign: 'left',
-                marginLeft: 15,
-                fontSize: 18,
-                fontFamily: FONT,
-                fontWeight: '600',
-                marginVertical: 1,
-                color: '#EEEEEE',
-              }}>
-              E-mail
-            </Text>
+          <View style={styles.box}>
+            <Text style={styles.textBox}>E-mail</Text>
             <TextInput
-              style={{
-                borderWidth: 2,
-                fontFamily: FONT,
-                width: '100%',
-                height: 40,
-                borderRadius: 10,
-                borderColor: '#999999',
-                paddingLeft: 8,
-                color: '#EEEEEE',
-              }}
+              style={styles.textInputBox}
               placeholder="E-mail"
               placeholderTextColor="#999999"
               value={user.email}
@@ -195,7 +125,8 @@ const Profile = () => {
                 borderRadius: 10,
                 padding: 6,
               },
-            ]}>
+            ]}
+            onPress={updateButton}>
             {({pressed}) => (
               <Text style={{fontFamily: FONT, color: '#EEEEEE'}}>
                 {pressed ? '전송 중...' : '수정 전송'}
@@ -203,39 +134,16 @@ const Profile = () => {
             )}
           </Pressable>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginVertical: 10,
-            }}>
-            <View style={{flex: 1, height: 1, backgroundColor: '#EEEEEE'}} />
-          </View>
+          <View style={styles.horizonLine} />
 
           <View style={{marginTop: 5, width: '100%', alignItems: 'center'}}>
-            <Text
-              style={{
-                width: '100%',
-                textAlign: 'left',
-                marginLeft: 15,
-                fontSize: 18,
-                fontFamily: FONT,
-                fontWeight: '600',
-                marginVertical: 1,
-                color: '#EEEEEE',
-              }}>
-              개선되면 좋은점을 이야기해요!
-            </Text>
+            <Text style={styles.textBox}>개선되면 좋은점을 이야기해요!</Text>
             <TextInput
               style={{
-                borderWidth: 2,
-                fontFamily: FONT,
-                width: '100%',
-                height: 40,
-                borderRadius: 10,
-                borderColor: '#999999',
-                paddingLeft: 8,
+                ...styles.textInputBox,
+                backgroundColor: disable ? '#FFFFFF' : '#333333',
               }}
+              editable={disable}
               placeholder="하고 싶은 이야기!"
               placeholderTextColor="#999999"
             />
@@ -249,7 +157,8 @@ const Profile = () => {
                 borderRadius: 10,
                 padding: 6,
               },
-            ]}>
+            ]}
+            onPress={() => Alert.alert('현재 준비중인 기능이에요!')}>
             {({pressed}) => (
               <Text style={{fontFamily: FONT, color: '#EEEEEE'}}>
                 {pressed ? '전송 중...' : '수정 전송'}
@@ -261,5 +170,41 @@ const Profile = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingHorizontal: '10%',
+    gap: 10,
+  },
+  box: {marginTop: 9, width: '100%', alignItems: 'center'},
+  textBox: {
+    width: '100%',
+    textAlign: 'left',
+    marginLeft: 15,
+    fontSize: 18,
+    fontWeight: '600',
+    marginVertical: 1,
+    fontFamily: FONT,
+    color: '#EEEEEE',
+  },
+  textInputBox: {
+    borderWidth: 2,
+    fontFamily: FONT,
+    width: '100%',
+    height: 40,
+    borderRadius: 10,
+    borderColor: '#999999',
+    paddingLeft: 8,
+    color: '#EEEEEE',
+  },
+  horizonLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#EEEEEE',
+    marginVertical: 10,
+  },
+});
 
 export default Profile;

@@ -1,5 +1,4 @@
-import {Dimensions, Text, View} from 'react-native';
-import React from 'react';
+import {Text, View} from 'react-native';
 import {Fonts} from '../../assets/fonts/fonts';
 
 const FONT: string = Fonts.BMDOHYEON;
