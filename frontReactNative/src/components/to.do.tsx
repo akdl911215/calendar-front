@@ -2,8 +2,6 @@ import {useState} from 'react';
 import {Text, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
-import {type TodoType} from 'screens/todo.list';
-
 interface Props {
   todo: TodoType;
   setSelectedTodo: (value: TodoType) => void;

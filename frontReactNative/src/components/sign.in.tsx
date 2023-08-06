@@ -2,7 +2,6 @@ import {
   Alert,
   Dimensions,
   Linking,
-  Platform,
   Pressable,
   Text,
   TextInput,

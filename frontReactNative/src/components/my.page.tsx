@@ -5,7 +5,7 @@ import Profile from './profile';
 import CustomersVoice from './customers.voice';
 
 const {height, width} = Dimensions.get('window');
-const VIEW_HEIGHT: number = height / 1.5;
+const VIEW_HEIGHT: number = height / 1.39;
 const VIEW_WIDTH = width / 1.3;
 const FONT: string = Fonts.BMDOHYEON;
 
@@ -75,7 +75,7 @@ const MyPage = () => {
           </View>
         </View>
 
-        <View style={{paddingVertical: 10}}></View>
+        <View style={{paddingVertical: 7}}></View>
 
         <View style={{backgroundColor: '#272829', height: VIEW_HEIGHT}}>
           {menubar ? <Profile /> : <CustomersVoice />}

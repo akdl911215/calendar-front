@@ -9,8 +9,6 @@ import {
   TextInput,
 } from 'react-native';
 
-import {TodoType} from 'screens/todo.list';
-
 interface Props {
   selected: TodoType;
   isModalVisible: boolean;
