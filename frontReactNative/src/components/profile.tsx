@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
     marginVertical: 1,
     fontFamily: FONT,
     color: '#EEEEEE',
+    letterSpacing: 0.5,
   },
   textInputBox: {
     borderWidth: 2,
@@ -198,6 +199,7 @@ const styles = StyleSheet.create({
     borderColor: '#999999',
     paddingLeft: 8,
     color: '#EEEEEE',
+    letterSpacing: 0.2,
   },
   horizonLine: {
     flex: 1,

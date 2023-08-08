@@ -3,6 +3,7 @@ import {
   Dimensions,
   Linking,
   Pressable,
+  StyleSheet,
   Text,
   TextInput,
   View,
@@ -73,95 +74,33 @@ const SignIn = () => {
 
   return (
     <>
-      <View
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#ffffff',
-          height: '100%',
-        }}>
-        <View
-          style={{
-            alignItems: 'center',
-            backgroundColor: '#ffffff',
-            width: VIEW_WIDTH,
-            height: VIEW_HEIGHT,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 5,
-            },
-            shadowOpacity: 0.34,
-            shadowRadius: 6.27,
-            elevation: 10,
-          }}>
-          <Text
-            style={{
-              paddingVertical: 24,
-              fontSize: 27,
-              fontFamily: FONT,
-              fontWeight: '400',
-              letterSpacing: 0.2,
-              color: '#29a19c',
-            }}>
-            Login
-          </Text>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: 0,
-              gap: 6,
-              width: 200,
-              height: 150,
-            }}>
-            <View style={{width: '100%'}}>
+      <View style={styles.container}>
+        <View style={styles.signInBox}>
+          <Text style={styles.signInText}>로그인</Text>
+          <View style={styles.internalComponentBatch}>
+            <View style={styles.idTextViewBox}>
               <TextInput
-                style={{
-                  borderWidth: 1,
-                  width: '100%',
-                  height: 40,
-                  borderRadius: 4,
-                  paddingLeft: 3,
-                  fontFamily: FONT,
-                }}
+                style={styles.idTextInputBox}
                 placeholder="아이디를 입력하세요."
+                placeholderTextColor="#999999"
                 onChangeText={value => handleChange({name: 'appId', value})}
               />
             </View>
-            <View style={{width: '100%'}}>
+            <View style={styles.passwordTextViewBox}>
               <TextInput
-                style={{
-                  borderWidth: 1,
-                  width: '100%',
-                  height: 40,
-                  borderRadius: 4,
-                  paddingLeft: 3,
-                  // fontFamily: signIn.password
-                  //   ? Platform.OS === 'ios'
-                  //     ? undefined
-                  //     : 'inherit'
-                  //   : FONT,
-                }}
+                style={styles.passwordTextInputBox}
                 textContentType="password"
                 placeholder="비밀번호를 입력하세요."
+                placeholderTextColor="#999999"
                 secureTextEntry={true}
                 onChangeText={value => handleChange({name: 'password', value})}
               />
             </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
+            <View style={styles.signInClickButton}>
               <Pressable
-                // onPress={() => Alert.alert('Login Button pressed')}
                 style={({pressed}) => [
                   {
-                    backgroundColor: pressed ? 'white' : 'rgb(210, 230, 255)',
+                    backgroundColor: pressed ? '#999999' : '#CCCCCC',
                   },
                   {
                     borderRadius: 8,
@@ -177,24 +116,21 @@ const SignIn = () => {
               </Pressable>
             </View>
             <View>
-              <Text style={{fontSize: 12, fontFamily: FONT}}>
+              <Text style={styles.signUpInformation}>
                 Don't have an account?
                 <Text
-                  style={{color: 'blue', fontFamily: FONT}}
+                  style={styles.signUpText}
                   onPress={() => Linking.openURL('')}>
                   Sign up
                 </Text>
               </Text>
             </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+            <View style={styles.snsLineBox}>
+              <View style={styles.snsLine} />
               <View>
-                <Text
-                  style={{width: 50, textAlign: 'center', fontFamily: FONT}}>
-                  SNS
-                </Text>
+                <Text style={styles.snsText}>SNS</Text>
               </View>
-              <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+              <View style={styles.snsLine} />
             </View>
           </View>
         </View>
@@ -202,5 +138,96 @@ const SignIn = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#333330',
+    height: '100%',
+  },
+  signInBox: {
+    alignItems: 'center',
+    backgroundColor: '#333333',
+    width: VIEW_WIDTH,
+    height: VIEW_HEIGHT,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    elevation: 10,
+  },
+  signInText: {
+    paddingVertical: 24,
+    fontSize: 27,
+    fontFamily: FONT,
+    fontWeight: '400',
+    letterSpacing: 0.5,
+    color: '#EEEEEE',
+  },
+  internalComponentBatch: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 0,
+    gap: 6,
+    width: 200,
+    height: 150,
+  },
+  idTextViewBox: {width: '100%'},
+  idTextInputBox: {
+    borderWidth: 1,
+    width: '100%',
+    height: 40,
+    borderRadius: 4,
+    paddingLeft: 3,
+    fontFamily: FONT,
+    color: '#EEEEEE',
+    letterSpacing: 0.2,
+  },
+  passwordTextViewBox: {width: '100%'},
+  passwordTextInputBox: {
+    borderWidth: 1,
+    width: '100%',
+    height: 40,
+    borderRadius: 4,
+    paddingLeft: 3,
+    color: '#EEEEEE',
+    letterSpacing: 0.2,
+    // fontFamily: signIn.password
+    //   ? Platform.OS === 'ios'
+    //     ? undefined
+    //     : 'inherit'
+    //   : FONT,
+  },
+  signInClickButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  signUpInformation: {
+    fontSize: 12,
+    fontFamily: FONT,
+    color: '#EEEEEE',
+    letterSpacing: 0.2,
+  },
+  signUpText: {color: '#ACFADF', fontFamily: FONT},
+  snsLineBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  snsLine: {flex: 1, height: 1, backgroundColor: '#EEEEEE'},
+  snsText: {
+    width: 50,
+    textAlign: 'center',
+    fontFamily: FONT,
+    color: '#EEEEEE',
+    letterSpacing: 0.2,
+  },
+});
 
 export default SignIn;
