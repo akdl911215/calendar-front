@@ -82,7 +82,22 @@ const App = (): JSX.Element | null => {
               <Text>{str}</Text>
             </View>
           </View>
-          <NavigationContainer theme={isDark ? DarkTheme : DefaultTheme}>
+          <NavigationContainer
+            theme={
+              isDark
+                ? DarkTheme
+                : {
+                    dark: false,
+                    colors: {
+                      primary: 'rgb(0, 122, 255)',
+                      background: '#333330',
+                      card: 'rgb(255, 255, 255)',
+                      text: 'rgb(28, 28, 30)',
+                      border: 'rgb(216, 216, 216)',
+                      notification: 'rgb(255, 59, 48)',
+                    },
+                  }
+            }>
             <BottomTab.Navigator screenOptions={handleBottomTabRoute}>
               <BottomTab.Screen name="달력" component={Calendar} />
               <BottomTab.Screen name="할일" component={TodoList} />
