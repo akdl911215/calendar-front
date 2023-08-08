@@ -160,28 +160,29 @@ const TodoList: React.FC<TodoListProps> = () => {
 };
 
 const styles = StyleSheet.create({
-  title: {fontSize: 25, fontFamily: FONT},
+  title: {fontSize: 25, fontFamily: FONT, color: '#EEEEEE'},
   todoListRowContainer: {
     width,
-    backgroundColor: '#FFFAFA',
+    backgroundColor: '#333339',
     height: VIEW_HEIGHT,
   },
   todoListRow: {
-    backgroundColor: 'white',
+    backgroundColor: '#333333',
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: 'black',
+    borderColor: '#EEEEEE',
     borderWidth: 1,
     height: 50,
-    borderBottomColor: 'gray',
+    borderBottomColor: '#EEEEE',
     borderBottomWidth: 1,
     gap: GAP,
   },
   todoListRowText: {
     fontSize: 18,
     padding: 5,
-    borderColor: '#ffffcc',
+    borderColor: '#EEEEEE',
     fontFamily: FONT,
+    color: '#EEEEEE',
   },
   todoListEmptyBox: {
     position: 'absolute',
@@ -196,6 +197,7 @@ const styles = StyleSheet.create({
     fontFamily: FONT,
     alignSelf: 'center',
     fontSize: 20,
+    color: 'black',
   },
 });
 

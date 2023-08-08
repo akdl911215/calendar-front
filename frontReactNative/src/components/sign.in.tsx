@@ -76,7 +76,7 @@ const SignIn = () => {
     <>
       <View style={styles.container}>
         <View style={styles.signInBox}>
-          <Text style={styles.signInText}>로그인</Text>
+          <Text style={styles.signInText}>시간을 계획적으로</Text>
           <View style={styles.internalComponentBatch}>
             <View style={styles.idTextViewBox}>
               <TextInput
@@ -184,18 +184,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: '100%',
     height: 40,
-    borderRadius: 4,
     paddingLeft: 3,
     fontFamily: FONT,
     color: '#EEEEEE',
     letterSpacing: 0.2,
+    borderRadius: 5,
+    borderColor: '#999999',
   },
   passwordTextViewBox: {width: '100%'},
   passwordTextInputBox: {
     borderWidth: 1,
     width: '100%',
     height: 40,
-    borderRadius: 4,
+    borderRadius: 5,
+    borderColor: '#999999',
     paddingLeft: 3,
     color: '#EEEEEE',
     letterSpacing: 0.2,
