@@ -64,6 +64,8 @@ const TodoList: React.FC<TodoListProps> = () => {
 
           setPrevious(previousArr);
           setSubsequent(subsequentArr);
+          console.log('previousArr : ', previousArr);
+          console.log('subsequentArr : ', subsequentArr);
         })
         .catch(err => console.error(err));
     }
@@ -163,11 +165,11 @@ const styles = StyleSheet.create({
   title: {fontSize: 25, fontFamily: FONT, color: '#EEEEEE'},
   todoListRowContainer: {
     width,
-    backgroundColor: '#333339',
+    backgroundColor: '#1E1E1E',
     height: VIEW_HEIGHT,
   },
   todoListRow: {
-    backgroundColor: '#333333',
+    backgroundColor: '#1E1E1E',
     flexDirection: 'row',
     alignItems: 'center',
     borderColor: '#EEEEEE',

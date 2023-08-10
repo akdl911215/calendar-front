@@ -18,12 +18,12 @@ const MyPage = () => {
       <View
         style={{
           display: 'flex',
-          backgroundColor: '#cccccc',
+          backgroundColor: '#000000',
           height: '100%',
         }}>
         <View
           style={{
-            backgroundColor: '#272829',
+            backgroundColor: '#1E1E1E',
             height: height / 17,
             display: 'flex',
             flexDirection: 'row',
@@ -77,7 +77,7 @@ const MyPage = () => {
 
         <View style={{paddingVertical: 7}}></View>
 
-        <View style={{backgroundColor: '#272829', height: VIEW_HEIGHT}}>
+        <View style={{backgroundColor: '#1E1E1E', height: VIEW_HEIGHT}}>
           {menubar ? <Profile /> : <CustomersVoice />}
         </View>
       </View>
