@@ -90,7 +90,7 @@ const App = (): JSX.Element | null => {
                     dark: false,
                     colors: {
                       primary: 'rgb(0, 122, 255)',
-                      background: '#333330',
+                      background: '#000000',
                       card: 'rgb(255, 255, 255)',
                       text: 'rgb(28, 28, 30)',
                       border: 'rgb(216, 216, 216)',
