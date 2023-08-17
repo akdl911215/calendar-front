@@ -31,7 +31,8 @@ Skill Speccification: Rect Native
 <br><br>
 - 빈리스트일 경우
 <br><br>
-![스크린샷 2023-07-28 오후 2 43 36](https://github.com/akdl911215/calendar-front/assets/76759835/5dca8e3d-a4f2-4335-80fb-06f5ccc821a9)
+![스크린샷 2023-08-17 오후 4 38 57](https://github.com/akdl911215/calendar-front/assets/76759835/f37dd087-22d6-44c8-a595-d077b2fc83ef)
+
 
 <br><br>
 - 리스트가 존재할 경우
@@ -44,6 +45,10 @@ Skill Speccification: Rect Native
 <br><br>
 - 로그인 화면
 <br><br>
-![스크린샷 2023-07-28 오후 2 42 37](https://github.com/akdl911215/calendar-front/assets/76759835/d8951f79-5873-4482-bea2-1a344dbbbe39)
+![스크린샷 2023-08-17 오후 4 39 12](https://github.com/akdl911215/calendar-front/assets/76759835/b52b6b4b-1c16-4827-9fb5-a65abc363e41)
 
+<br><br>
+- 프로파일 화면
+<br><br>
+![스크린샷 2023-08-17 오후 4 49 16](https://github.com/akdl911215/calendar-front/assets/76759835/7acb70c4-e4ce-4a48-8848-db0e70283afc)
 
