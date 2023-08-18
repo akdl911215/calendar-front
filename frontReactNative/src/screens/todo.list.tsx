@@ -48,10 +48,11 @@ const TodoList: React.FC<TodoListProps> = () => {
       setMonth(MONTH);
       setCurrentTimeStamp(DATE_DAY);
 
-      TodoListAPI(DATE_MONTH)
+      TodoListAPI(MONTH)
         .then(res => {
           const apiArr: TodoType[] = res.data.response.monthList;
           setApiInitialState(apiArr);
+          console.log('apiArr : ', apiArr);
 
           for (let i = 0; i < apiArr.length; ++i) {
             const apiDay: number = apiArr[i].day;
@@ -77,10 +78,12 @@ const TodoList: React.FC<TodoListProps> = () => {
     index,
   }: {
     done: boolean;
-    date: number;
+    date: Date;
     index: number;
   }) => {
-    if (currentTimeStamp > date) {
+    const localDate = new Date(date);
+    const time = localDate.getTime();
+    if (currentTimeStamp > time) {
       const newState = [...previous];
       newState[index] = {...previous[index], done};
 

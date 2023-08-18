@@ -1,16 +1,12 @@
 type TodoType = Readonly<{
   id: string;
-  appId: string;
-  nickname: string;
-  email: string;
-  phone: string;
-  date: number;
+  author_id: string;
+  date: Date;
   todo: string;
   done: boolean;
-  year: number;
   month: number;
   day: number;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date | null;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date | null;
 }>;

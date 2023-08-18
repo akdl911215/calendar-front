@@ -2,9 +2,10 @@ import axios from 'axios';
 import {BACK_URL} from '../_common/back.url';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AxiosError} from 'axios/index';
+const URL = '127.0.0.1:9595';
 
 export const CLIENT = axios.create({
-  baseURL: `http://${BACK_URL}`,
+  baseURL: `http://${URL}`,
 });
 
 CLIENT.interceptors.request.use(
