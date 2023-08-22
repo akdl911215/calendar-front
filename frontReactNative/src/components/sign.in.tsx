@@ -1,7 +1,6 @@
 import {
   Alert,
   Dimensions,
-  Linking,
   Pressable,
   StyleSheet,
   Text,
@@ -12,7 +11,7 @@ import {useState} from 'react';
 import {SignInDataAPI} from '../api/user.api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSetRecoilState} from 'recoil';
-import {userModelState} from '../atoms/users.atoms';
+import {userModelState, userSignUpModelState} from '../atoms/users.atoms';
 import {Fonts} from '../../assets/fonts/fonts';
 
 const {height, width} = Dimensions.get('window');
@@ -22,14 +21,16 @@ const FONT: string = Fonts.BMDOHYEON;
 
 interface UserType {
   readonly id: string;
-  readonly appId: string;
+  readonly app_id: string;
   readonly nickname: string;
+  readonly password: string;
   readonly phone: string;
-  readonly accessToken: string;
-  readonly refreshToken: string;
-  readonly createdAt: Date;
-  readonly updatedAt: Date;
-  readonly deletedAt: null | Date;
+  readonly email: string;
+  readonly access_token: string;
+  readonly refresh_token: string | null;
+  readonly created_at: Date;
+  readonly updated_at: Date;
+  readonly deleted_at: Date | null;
 }
 
 const SignIn = () => {
@@ -39,6 +40,7 @@ const SignIn = () => {
   });
   const {appId, password} = signIn;
   const setUserModel = useSetRecoilState(userModelState);
+  const setSignUpModel = useSetRecoilState(userSignUpModelState);
 
   const handleChange = (event: {name: string; value: string}): void => {
     const {name, value} = event;
@@ -48,6 +50,8 @@ const SignIn = () => {
       [name]: value.toLowerCase(),
     });
   };
+
+  const signUpButton = async () => setSignUpModel(true);
 
   const signInButton = async () => {
     if (appId === '' || password === '') {
@@ -62,8 +66,8 @@ const SignIn = () => {
       const userJsonResponse: UserType = response;
       setUserModel(userJsonResponse);
 
-      const at: string = userJsonResponse.accessToken;
-      const rt: string = userJsonResponse.refreshToken;
+      const at: string = userJsonResponse.access_token;
+      const rt: string = userJsonResponse.refresh_token as string;
 
       await AsyncStorage.setItem('access_token', at);
       await AsyncStorage.setItem('refresh_token', rt);
@@ -117,11 +121,9 @@ const SignIn = () => {
             </View>
             <View>
               <Text style={styles.signUpInformation}>
-                Don't have an account?
-                <Text
-                  style={styles.signUpText}
-                  onPress={() => Linking.openURL('')}>
-                  Sign up
+                계정이 없나요?
+                <Text style={styles.signUpText} onPress={signUpButton}>
+                  회원가입
                 </Text>
               </Text>
             </View>
