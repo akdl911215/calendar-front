@@ -1,4 +1,5 @@
 import {
+  Alert,
   Dimensions,
   Pressable,
   StyleSheet,
@@ -7,15 +8,148 @@ import {
   View,
 } from 'react-native';
 import {Fonts} from '../../assets/fonts/fonts';
+import {useEffect, useState} from 'react';
+import {
+  DuplicateVerificationAppId,
+  DuplicateVerificationEmail,
+  DuplicateVerificationNickname,
+  DuplicateVerificationPhone,
+} from '../api/user.api';
+import app from '../../App';
+import signIn from './sign.in';
 
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 1.5;
 const VIEW_WIDTH = width / 1.3;
 const FONT: string = Fonts.BMDOHYEON;
 
+interface SignUpType {
+  readonly appId: string;
+  readonly password: string;
+  readonly nickname: string;
+  readonly phone: string;
+  readonly email: string;
+}
+
+interface UserDuplicateVerification {
+  readonly appId: boolean;
+  readonly nickname: boolean;
+  readonly phone: boolean;
+  readonly email: boolean;
+}
+
 const Signup = () => {
-  const handleChange = (event: {name: string; value: string}): void => {
+  const [signUp, setSignUp] = useState<SignUpType>({
+    appId: '',
+    password: '',
+    nickname: '',
+    phone: '',
+    email: '',
+  });
+  const {appId, password, phone, email, nickname} = signUp;
+
+  const [userDuplicateVerification, setUserDuplicateVerification] =
+    useState<UserDuplicateVerification>({
+      appId: false,
+      nickname: false,
+      phone: false,
+      email: false,
+    });
+  useEffect(() => console.log('signUp : ', signUp), [signUp]);
+  useEffect(
+    () =>
+      console.log('userDuplicateVerification : ', userDuplicateVerification),
+    [userDuplicateVerification],
+  );
+
+  const handleChange = (event: {
+    readonly name: string;
+    readonly value: string;
+  }): void => {
     const {name, value} = event;
+
+    setSignUp({
+      ...signUp,
+      [name]: value.toLowerCase(),
+    });
+  };
+
+  const duplicateVerification = async (event: {
+    readonly name: string;
+  }): Promise<void> => {
+    const {name} = event;
+
+    if (name === 'appId') {
+      const {
+        data: {
+          response: {appIdExists},
+        },
+      } = await DuplicateVerificationAppId(appId);
+
+      if (appIdExists === true) {
+        Alert.alert('존재하는 아이디입니다.');
+        return;
+      }
+
+      setUserDuplicateVerification({
+        ...userDuplicateVerification,
+        appId: appIdExists,
+      });
+    }
+
+    if (name === 'phone') {
+      const {
+        data: {
+          response: {phoneExists},
+        },
+      } = await DuplicateVerificationPhone(phone);
+
+      if (phoneExists === true) {
+        Alert.alert('존재하는 번호입니다.');
+        return;
+      }
+
+      setUserDuplicateVerification({
+        ...userDuplicateVerification,
+        phone: phoneExists,
+      });
+    }
+
+    if (name === 'email') {
+      const {
+        data: {
+          response: {emailExists},
+        },
+      } = await DuplicateVerificationEmail(email);
+
+      if (emailExists === true) {
+        Alert.alert('존재하는 이메일입니다.');
+        return;
+      }
+
+      setUserDuplicateVerification({
+        ...userDuplicateVerification,
+        email: emailExists,
+      });
+    }
+
+    if (name === 'nickname') {
+      const {
+        data: {
+          response: {nicknameExists},
+        },
+      } = await DuplicateVerificationNickname(nickname);
+
+      if (nicknameExists === true) {
+        Alert.alert('존재하는 닉네임입니다.');
+        return;
+      }
+
+      setUserDuplicateVerification({
+        ...userDuplicateVerification,
+        nickname: nicknameExists,
+      });
+    }
   };
 
   return (
@@ -39,11 +173,17 @@ const Signup = () => {
                   {
                     borderRadius: 8,
                     padding: 6,
+                    flex: 1,
                   },
-                ]}>
+                ]}
+                onPress={() => duplicateVerification({name: 'appId'})}>
                 {({pressed}) => (
-                  <Text style={{fontFamily: FONT}}>
-                    {pressed ? '중복확인 중...' : '중복확인'}
+                  <Text
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: 15,
+                    }}>
+                    {pressed ? '확인 중...' : '중복확인'}
                   </Text>
                 )}
               </Pressable>
@@ -65,6 +205,28 @@ const Signup = () => {
                 placeholderTextColor="#999999"
                 onChangeText={value => handleChange({name: 'nickname', value})}
               />
+              <Pressable
+                style={({pressed}) => [
+                  {
+                    backgroundColor: pressed ? '#999999' : '#CCCCCC',
+                  },
+                  {
+                    borderRadius: 8,
+                    padding: 6,
+                    flex: 1,
+                  },
+                ]}
+                onPress={() => duplicateVerification({name: 'nickname'})}>
+                {({pressed}) => (
+                  <Text
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: 15,
+                    }}>
+                    {pressed ? '확인 중...' : '중복확인'}
+                  </Text>
+                )}
+              </Pressable>
             </View>
             <View style={styles.idTextViewBox}>
               <TextInput
@@ -73,6 +235,28 @@ const Signup = () => {
                 placeholderTextColor="#999999"
                 onChangeText={value => handleChange({name: 'phone', value})}
               />
+              <Pressable
+                style={({pressed}) => [
+                  {
+                    backgroundColor: pressed ? '#999999' : '#CCCCCC',
+                  },
+                  {
+                    borderRadius: 8,
+                    padding: 6,
+                    flex: 1,
+                  },
+                ]}
+                onPress={() => duplicateVerification({name: 'phone'})}>
+                {({pressed}) => (
+                  <Text
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: 15,
+                    }}>
+                    {pressed ? '확인 중...' : '중복확인'}
+                  </Text>
+                )}
+              </Pressable>
             </View>
             <View style={styles.idTextViewBox}>
               <TextInput
@@ -81,6 +265,28 @@ const Signup = () => {
                 placeholderTextColor="#999999"
                 onChangeText={value => handleChange({name: 'email', value})}
               />
+              <Pressable
+                style={({pressed}) => [
+                  {
+                    backgroundColor: pressed ? '#999999' : '#CCCCCC',
+                  },
+                  {
+                    borderRadius: 8,
+                    padding: 6,
+                    flex: 1,
+                  },
+                ]}
+                onPress={() => duplicateVerification({name: 'email'})}>
+                {({pressed}) => (
+                  <Text
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: 15,
+                    }}>
+                    {pressed ? '확인 중...' : '중복확인'}
+                  </Text>
+                )}
+              </Pressable>
             </View>
             <View style={styles.signInClickButton}>
               <Pressable
@@ -147,7 +353,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 150,
   },
-  idTextViewBox: {width: '100%'},
+  idTextViewBox: {width: '100%', display: 'flex', flexDirection: 'row'},
   idTextInputBox: {
     borderWidth: 1,
     width: '100%',
@@ -158,6 +364,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.2,
     borderRadius: 5,
     borderColor: '#999999',
+    flex: 5,
   },
   passwordTextViewBox: {width: '100%'},
   passwordTextInputBox: {
@@ -169,6 +376,7 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
     color: '#EEEEEE',
     letterSpacing: 0.2,
+
     // fontFamily: signIn.password
     //   ? Platform.OS === 'ios'
     //     ? undefined

@@ -18,3 +18,15 @@ export const InquiryDataAPI = async () => await CLIENT.get('users');
 
 export const UpdateDataAPI = async (user: UserUpdate) =>
   await CLIENT.patch('users/update', user);
+
+export const DuplicateVerificationAppId = async (appId: string) =>
+  await CLIENT.get(`users/duplicate/verification/appId/${appId}`);
+
+export const DuplicateVerificationEmail = async (email: string) =>
+  await CLIENT.get(`users/duplicate/verification/email/${email}`);
+
+export const DuplicateVerificationPhone = async (phone: string) =>
+  await CLIENT.get(`users/duplicate/verification/phone/${phone}`);
+
+export const DuplicateVerificationNickname = async (nickname: string) =>
+  await CLIENT.get(`users/duplicate/verification/nickname/${nickname}`);
