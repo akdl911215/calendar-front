@@ -14,9 +14,12 @@ import {
   DuplicateVerificationEmail,
   DuplicateVerificationNickname,
   DuplicateVerificationPhone,
+  SignUpDataAPI,
 } from '../api/user.api';
 import app from '../../App';
 import signIn from './sign.in';
+import {userSignUpModelState} from '../atoms/users.atoms';
+import {useSetRecoilState} from 'recoil';
 
 const {height, width} = Dimensions.get('window');
 const VIEW_HEIGHT: number = height / 1.5;
@@ -50,10 +53,10 @@ const Signup = () => {
 
   const [userDuplicateVerification, setUserDuplicateVerification] =
     useState<UserDuplicateVerification>({
-      appId: false,
-      nickname: false,
-      phone: false,
-      email: false,
+      appId: true,
+      nickname: true,
+      phone: true,
+      email: true,
     });
   useEffect(() => console.log('signUp : ', signUp), [signUp]);
   useEffect(
@@ -78,6 +81,7 @@ const Signup = () => {
     readonly name: string;
   }): Promise<void> => {
     const {name} = event;
+    console.log('name : ', name);
 
     if (name === 'appId') {
       const {
@@ -86,7 +90,8 @@ const Signup = () => {
         },
       } = await DuplicateVerificationAppId(appId);
 
-      if (appIdExists === true) {
+      console.log('appIdExists : ', appIdExists);
+      if (appIdExists === false) {
         Alert.alert('존재하는 아이디입니다.');
         return;
       }
@@ -104,7 +109,8 @@ const Signup = () => {
         },
       } = await DuplicateVerificationPhone(phone);
 
-      if (phoneExists === true) {
+      console.log('phoneExists : ', phoneExists);
+      if (phoneExists === false) {
         Alert.alert('존재하는 번호입니다.');
         return;
       }
@@ -122,7 +128,8 @@ const Signup = () => {
         },
       } = await DuplicateVerificationEmail(email);
 
-      if (emailExists === true) {
+      console.log('emailExists : ', emailExists);
+      if (emailExists === false) {
         Alert.alert('존재하는 이메일입니다.');
         return;
       }
@@ -140,7 +147,8 @@ const Signup = () => {
         },
       } = await DuplicateVerificationNickname(nickname);
 
-      if (nicknameExists === true) {
+      console.log('nicknameExists : ', nicknameExists);
+      if (nicknameExists === false) {
         Alert.alert('존재하는 닉네임입니다.');
         return;
       }
@@ -150,6 +158,22 @@ const Signup = () => {
         nickname: nicknameExists,
       });
     }
+  };
+
+  const setSignInModel = useSetRecoilState(userSignUpModelState);
+  const createUserSubmit = async () => {
+    console.log('create');
+    if (!appId || !password || !nickname || !email || !phone) {
+      Alert.alert('회원가입 정보를 확인해보세요.');
+      return;
+    }
+
+    const {
+      data: {response},
+    } = await SignUpDataAPI(signUp);
+
+    console.log('response : ', response);
+    if (!!response) await setSignInModel(false);
   };
 
   return (
@@ -163,6 +187,7 @@ const Signup = () => {
                 style={styles.idTextInputBox}
                 placeholder="아이디를 입력하세요."
                 placeholderTextColor="#999999"
+                editable={userDuplicateVerification.appId as boolean}
                 onChangeText={value => handleChange({name: 'appId', value})}
               />
               <Pressable
@@ -233,6 +258,7 @@ const Signup = () => {
                 style={styles.idTextInputBox}
                 placeholder="핸드폰을 입력하세요."
                 placeholderTextColor="#999999"
+                editable={true}
                 onChangeText={value => handleChange({name: 'phone', value})}
               />
               <Pressable
@@ -290,6 +316,7 @@ const Signup = () => {
             </View>
             <View style={styles.signInClickButton}>
               <Pressable
+                onPress={createUserSubmit}
                 style={({pressed}) => [
                   {
                     backgroundColor: pressed ? '#999999' : '#CCCCCC',

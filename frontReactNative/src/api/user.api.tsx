@@ -11,6 +11,18 @@ interface UserUpdate {
   readonly nickname: string;
   readonly phone: string;
 }
+
+interface UserSignUp {
+  readonly appId: string;
+  readonly password: string;
+  readonly email: string;
+  readonly phone: string;
+  readonly nickname: string;
+}
+
+export const SignUpDataAPI = async (user: UserSignUp) =>
+  await CLIENT.post('users/signup', user);
+
 export const SignInDataAPI = async (user: UserSignIn) =>
   await CLIENT.post(`users/login`, user);
 
