@@ -16,8 +16,6 @@ import {
   DuplicateVerificationPhone,
   SignUpDataAPI,
 } from '../api/user.api';
-import app from '../../App';
-import signIn from './sign.in';
 import {userSignUpModelState} from '../atoms/users.atoms';
 import {useSetRecoilState} from 'recoil';
 
@@ -34,7 +32,15 @@ interface SignUpType {
   readonly email: string;
 }
 
-interface UserDuplicateVerification {
+type DuplicateVerification = 'exists' | 'nonExists' | 'initialValue';
+interface UserDuplicateVerificationType {
+  readonly appId: DuplicateVerification;
+  readonly nickname: DuplicateVerification;
+  readonly phone: DuplicateVerification;
+  readonly email: DuplicateVerification;
+}
+
+interface DuplicateVerificationButtonType {
   readonly appId: boolean;
   readonly nickname: boolean;
   readonly phone: boolean;
@@ -42,6 +48,8 @@ interface UserDuplicateVerification {
 }
 
 const Signup = () => {
+  const setSignInModel = useSetRecoilState(userSignUpModelState);
+
   const [signUp, setSignUp] = useState<SignUpType>({
     appId: '',
     password: '',
@@ -52,23 +60,17 @@ const Signup = () => {
   const {appId, password, phone, email, nickname} = signUp;
 
   const [userDuplicateVerification, setUserDuplicateVerification] =
-    useState<UserDuplicateVerification>({
-      appId: true,
-      nickname: true,
-      phone: true,
-      email: true,
+    useState<UserDuplicateVerificationType>({
+      appId: 'initialValue',
+      nickname: 'initialValue',
+      phone: 'initialValue',
+      email: 'initialValue',
     });
-  useEffect(() => console.log('signUp : ', signUp), [signUp]);
-  useEffect(
-    () =>
-      console.log('userDuplicateVerification : ', userDuplicateVerification),
-    [userDuplicateVerification],
-  );
 
-  const handleChange = (event: {
+  const handleChange = async (event: {
     readonly name: string;
     readonly value: string;
-  }): void => {
+  }): Promise<void> => {
     const {name, value} = event;
 
     setSignUp({
@@ -77,6 +79,23 @@ const Signup = () => {
     });
   };
 
+  const [duplicateVerificationButton, setDuplicateVerificationButton] =
+    useState<DuplicateVerificationButtonType>({
+      appId: false,
+      nickname: false,
+      phone: false,
+      email: false,
+    });
+
+  useEffect(
+    () => console.log(userDuplicateVerification),
+    [userDuplicateVerification],
+  );
+  useEffect(
+    () => console.log(duplicateVerificationButton),
+    [duplicateVerificationButton],
+  );
+
   const duplicateVerification = async (event: {
     readonly name: string;
   }): Promise<void> => {
@@ -84,6 +103,21 @@ const Signup = () => {
     console.log('name : ', name);
 
     if (name === 'appId') {
+      if (!appId) {
+        Alert.alert('아이디를 확인하세요.');
+        return;
+      }
+      // else if (!nickname) {
+      //   Alert.alert('닉네임을 확인하세요.');
+      //   return;
+      // } else if (!phone) {
+      //   Alert.alert('핸드폰 번호를 확인하세요.');
+      //   return;
+      // } else if (!email) {
+      //   Alert.alert('이메일을 확인하세요.');
+      //   return;
+      // }
+
       const {
         data: {
           response: {appIdExists},
@@ -99,6 +133,10 @@ const Signup = () => {
       setUserDuplicateVerification({
         ...userDuplicateVerification,
         appId: appIdExists,
+      });
+      setDuplicateVerificationButton({
+        ...duplicateVerificationButton,
+        appId: true,
       });
     }
 
@@ -119,6 +157,10 @@ const Signup = () => {
         ...userDuplicateVerification,
         phone: phoneExists,
       });
+      setDuplicateVerificationButton({
+        ...duplicateVerificationButton,
+        phone: true,
+      });
     }
 
     if (name === 'email') {
@@ -137,6 +179,10 @@ const Signup = () => {
       setUserDuplicateVerification({
         ...userDuplicateVerification,
         email: emailExists,
+      });
+      setDuplicateVerificationButton({
+        ...duplicateVerificationButton,
+        email: true,
       });
     }
 
@@ -157,10 +203,63 @@ const Signup = () => {
         ...userDuplicateVerification,
         nickname: nicknameExists,
       });
+      setDuplicateVerificationButton({
+        ...duplicateVerificationButton,
+        nickname: true,
+      });
     }
   };
 
-  const setSignInModel = useSetRecoilState(userSignUpModelState);
+  const duplicateButtonUncheck = async (event: {
+    readonly name: string;
+  }): Promise<void> => {
+    const {name} = event;
+
+    if (name === 'appId') {
+      setDuplicateVerificationButton({
+        ...duplicateVerificationButton,
+        appId: false,
+      });
+      setUserDuplicateVerification({
+        ...userDuplicateVerification,
+        appId: 'initialValue',
+      });
+    }
+
+    if (name === 'email') {
+      setDuplicateVerificationButton({
+        ...duplicateVerificationButton,
+        email: false,
+      });
+      setUserDuplicateVerification({
+        ...userDuplicateVerification,
+        email: 'initialValue',
+      });
+    }
+
+    if (name === 'nickname') {
+      setDuplicateVerificationButton({
+        ...duplicateVerificationButton,
+        nickname: false,
+      });
+      setUserDuplicateVerification({
+        ...userDuplicateVerification,
+        nickname: 'initialValue',
+      });
+    }
+
+    if (name === 'phone') {
+      setDuplicateVerificationButton({
+        ...duplicateVerificationButton,
+        phone: false,
+      });
+      setUserDuplicateVerification({
+        ...userDuplicateVerification,
+        phone: 'initialValue',
+      });
+    }
+  };
+
   const createUserSubmit = async () => {
     console.log('create');
     if (!appId || !password || !nickname || !email || !phone) {
@@ -174,6 +273,7 @@ const Signup = () => {
 
     console.log('response : ', response);
     if (!!response) await setSignInModel(false);
+    else Alert.alert('회원가입 시도를 다시 해보세요.');
   };
 
   return (
@@ -187,31 +287,59 @@ const Signup = () => {
                 style={styles.idTextInputBox}
                 placeholder="아이디를 입력하세요."
                 placeholderTextColor="#999999"
-                editable={userDuplicateVerification.appId as boolean}
+                editable={
+                  userDuplicateVerification.appId === 'exists' ||
+                  userDuplicateVerification.appId === 'initialValue'
+                }
                 onChangeText={value => handleChange({name: 'appId', value})}
               />
-              <Pressable
-                style={({pressed}) => [
-                  {
-                    backgroundColor: pressed ? '#999999' : '#CCCCCC',
-                  },
-                  {
-                    borderRadius: 8,
-                    padding: 6,
-                    flex: 1,
-                  },
-                ]}
-                onPress={() => duplicateVerification({name: 'appId'})}>
-                {({pressed}) => (
-                  <Text
-                    style={{
-                      fontFamily: FONT,
-                      fontSize: 15,
-                    }}>
-                    {pressed ? '확인 중...' : '중복확인'}
-                  </Text>
-                )}
-              </Pressable>
+              {duplicateVerificationButton.appId ? (
+                <Pressable
+                  style={({pressed}) => [
+                    {
+                      backgroundColor: pressed ? '#999999' : '#CCCCCC',
+                    },
+                    {
+                      borderRadius: 8,
+                      padding: 6,
+                      flex: 1,
+                    },
+                  ]}
+                  onPress={() => duplicateButtonUncheck({name: 'appId'})}>
+                  {({pressed}) => (
+                    <Text
+                      style={{
+                        fontFamily: FONT,
+                        fontSize: 15,
+                      }}>
+                      {pressed ? '해제 중...' : '확인 해제'}
+                    </Text>
+                  )}
+                </Pressable>
+              ) : (
+                <Pressable
+                  style={({pressed}) => [
+                    {
+                      backgroundColor: pressed ? '#999999' : '#CCCCCC',
+                    },
+                    {
+                      borderRadius: 8,
+                      padding: 6,
+                      flex: 1,
+                    },
+                  ]}
+                  onPress={() => duplicateVerification({name: 'appId'})}>
+                  {({pressed}) => (
+                    <Text
+                      style={{
+                        fontFamily: FONT,
+                        fontSize: 15,
+                      }}>
+                      {pressed ? '확인 중...' : '중복확인'}
+                    </Text>
+                  )}
+                </Pressable>
+              )}
             </View>
             <View style={styles.passwordTextViewBox}>
               <TextInput
@@ -219,7 +347,6 @@ const Signup = () => {
                 textContentType="password"
                 placeholder="비밀번호를 입력하세요."
                 placeholderTextColor="#999999"
-                secureTextEntry={true}
                 onChangeText={value => handleChange({name: 'password', value})}
               />
             </View>
@@ -228,6 +355,10 @@ const Signup = () => {
                 style={styles.idTextInputBox}
                 placeholder="닉네임을 입력하세요."
                 placeholderTextColor="#999999"
+                editable={
+                  userDuplicateVerification.nickname === 'nonExists' ||
+                  userDuplicateVerification.nickname === 'initialValue'
+                }
                 onChangeText={value => handleChange({name: 'nickname', value})}
               />
               <Pressable
@@ -258,7 +389,10 @@ const Signup = () => {
                 style={styles.idTextInputBox}
                 placeholder="핸드폰을 입력하세요."
                 placeholderTextColor="#999999"
-                editable={true}
+                editable={
+                  userDuplicateVerification.phone === 'nonExists' ||
+                  userDuplicateVerification.phone === 'initialValue'
+                }
                 onChangeText={value => handleChange({name: 'phone', value})}
               />
               <Pressable
@@ -289,6 +423,10 @@ const Signup = () => {
                 style={styles.idTextInputBox}
                 placeholder="E-메일을 입력하세요."
                 placeholderTextColor="#999999"
+                editable={
+                  userDuplicateVerification.email === 'nonExists' ||
+                  userDuplicateVerification.email === 'initialValue'
+                }
                 onChangeText={value => handleChange({name: 'email', value})}
               />
               <Pressable
