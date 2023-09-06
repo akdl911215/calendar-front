@@ -115,7 +115,7 @@ const Signup = () => {
       } = await DuplicateVerificationAppId(appId);
 
       console.log('appIdExists : ', appIdExists);
-      if (appIdExists === false) {
+      if (appIdExists === 'exists') {
         Alert.alert('존재하는 아이디입니다.');
         return;
       }
@@ -143,7 +143,7 @@ const Signup = () => {
       } = await DuplicateVerificationPhone(phone);
 
       console.log('phoneExists : ', phoneExists);
-      if (phoneExists === false) {
+      if (phoneExists === 'exists') {
         Alert.alert('존재하는 번호입니다.');
         return;
       }
@@ -170,7 +170,7 @@ const Signup = () => {
       } = await DuplicateVerificationEmail(email);
 
       console.log('emailExists : ', emailExists);
-      if (emailExists === false) {
+      if (emailExists === 'exists') {
         Alert.alert('존재하는 이메일입니다.');
         return;
       }
@@ -198,7 +198,7 @@ const Signup = () => {
       } = await DuplicateVerificationNickname(nickname);
 
       console.log('nicknameExists : ', nicknameExists);
-      if (nicknameExists === false) {
+      if (nicknameExists === 'exists') {
         Alert.alert('존재하는 닉네임입니다.');
         return;
       }
@@ -273,9 +273,11 @@ const Signup = () => {
       Alert.alert('닉네임을 확인해보세요.');
     } else if (!phone) {
       Alert.alert('핸드폰 번호를 확인해보세요.');
-    } else {
+    } else if (!email) {
       Alert.alert('이메일을 확인해보세요.');
     }
+
+    console.log('signUp submit : ', signUp);
 
     const {
       data: {response},
@@ -357,6 +359,7 @@ const Signup = () => {
                 textContentType="password"
                 placeholder="비밀번호를 입력하세요."
                 placeholderTextColor="#999999"
+                secureTextEntry={true}
                 onChangeText={value => handleChange({name: 'password', value})}
               />
             </View>
@@ -628,7 +631,7 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
     color: '#EEEEEE',
     letterSpacing: 0.2,
-
+    // fontFamily: FONT,
     // fontFamily: signIn.password
     //   ? Platform.OS === 'ios'
     //     ? undefined
