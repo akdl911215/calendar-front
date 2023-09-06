@@ -21,7 +21,7 @@ interface UserSignUp {
 }
 
 export const SignUpDataAPI = async (user: UserSignUp) =>
-  await CLIENT.post('users/signup', user);
+  await CLIENT.post('users', user);
 
 export const SignInDataAPI = async (user: UserSignIn) =>
   await CLIENT.post(`users/login`, user);
