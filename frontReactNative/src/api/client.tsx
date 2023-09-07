@@ -2,10 +2,9 @@ import axios from 'axios';
 import {BACK_URL} from '../_common/back.url';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AxiosError} from 'axios/index';
-const URL = '127.0.0.1:9595';
 
 export const CLIENT = axios.create({
-  baseURL: `http://${URL}`,
+  baseURL: `http://${BACK_URL}`,
 });
 
 CLIENT.interceptors.request.use(
@@ -40,7 +39,7 @@ CLIENT.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       try {
         const {status, data} = await axios({
-          url: 'http://3.35/136.100:9595/users/refresh/token',
+          url: `http://${BACK_URL}/users/refresh/token`,
           method: 'GET',
           headers: {
             Authorization: refreshToken,
