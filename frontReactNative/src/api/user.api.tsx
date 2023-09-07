@@ -5,11 +5,24 @@ interface UserSignIn {
   readonly password: string;
 }
 
-interface UserUpdate {
+interface UserUpdateAppId {
   readonly id: string;
   readonly appId: string;
+}
+
+interface UserUpdateNickname {
+  readonly id: string;
   readonly nickname: string;
+}
+
+interface UserUpdatePhone {
+  readonly id: string;
   readonly phone: string;
+}
+
+interface UsersUpdateEmail {
+  readonly id: string;
+  readonly email: string;
 }
 
 interface UserSignUp {
@@ -28,8 +41,17 @@ export const SignInDataAPI = async (user: UserSignIn) =>
 
 export const InquiryDataAPI = async () => await CLIENT.get('users');
 
-export const UpdateDataAPI = async (user: UserUpdate) =>
-  await CLIENT.patch('users/update', user);
+export const UpdateAppIdDataAPI = async (user: UserUpdateAppId) =>
+  await CLIENT.patch('users/update/appId', user);
+
+export const UpdateNicknameDataAPI = async (user: UserUpdateNickname) =>
+  await CLIENT.patch('users/update/nickname', user);
+
+export const UpdatePhoneDataAPI = async (user: UserUpdatePhone) =>
+  await CLIENT.patch('users/update/phone', user);
+
+export const UpdateEmailDataAPI = async (user: UsersUpdateEmail) =>
+  await CLIENT.patch('users/update/email', user);
 
 export const DuplicateVerificationAppId = async (appId: string) =>
   await CLIENT.get(`users/duplicate/verification/appId/${appId}`);
