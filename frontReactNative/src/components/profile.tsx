@@ -1,5 +1,6 @@
 import {
   Alert,
+  Button,
   Dimensions,
   Pressable,
   ScrollView,
@@ -8,13 +9,10 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {useSetRecoilState} from 'recoil';
-import {userModelState} from '../atoms/users.atoms';
 import {Fonts} from '../../assets/fonts/fonts';
 import {useEffect, useState} from 'react';
 import {
   InquiryDataAPI,
-  UpdateAppIdDataAPI,
   UpdateEmailDataAPI,
   UpdateNicknameDataAPI,
   UpdatePhoneDataAPI,
@@ -44,34 +42,16 @@ const Profile = () => {
   useEffect(() => console.log('user : ', user), []);
   const [disable, setDisable] = useState<boolean>(false);
 
-  const setUserModel = useSetRecoilState(userModelState);
-
-  const menuBarButton = (): void => {
-    setProfileMenu(!profileMenu);
-    setCustomersVoiceMenu(!customersVoiceMenu);
-  };
-
   useEffect(() => {
     InquiryDataAPI()
       .then(res => {
-        console.log('res.data.response : ', res.data.response);
-        setUser({...res.data.response});
+        if (!res?.data?.response)
+          Alert.alert('유저 정보를 가져오지 못했습니다.');
+
+        setUser(res.data.response);
       })
       .catch(err => console.error(err));
   }, []);
-
-  const updateAppIdButton = async () => {
-    if (user.id === '' || user.app_id === '') {
-      Alert.alert('수정할 정보를 확인해 주세요.');
-      return;
-    }
-
-    const {data} = await UpdateAppIdDataAPI({
-      id: user.id,
-      appId: user.app_id,
-    });
-    console.log('data : ', data);
-  };
 
   const updateNicknameButton = async () => {
     if (user.id === '' || user.nickname === '') {
@@ -79,11 +59,44 @@ const Profile = () => {
       return;
     }
 
-    const {data} = await UpdateNicknameDataAPI({
-      id: user.id,
-      nickname: user.nickname,
-    });
-    console.log('data : ', data);
+    await Alert.alert(`닉네임 변경`, `닉네임을 변경하시겠습니까?`, [
+      {
+        text: '취소',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: '확인',
+        onPress: async () => {
+          await UpdateNicknameDataAPI({
+            nickname: user.nickname,
+          })
+            .then(response => {
+              setUser(response.data.response);
+            })
+            .catch(error => {
+              // Error
+              if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                if (error.response.data.response.statusCode === 409) {
+                  Alert.alert('이미 존재하는 닉네임 입니다.');
+                }
+              } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the
+                // browser and an instance of
+                // http.ClientRequest in node.js
+                console.log('error.request : ', error.request);
+              } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+              }
+              console.log(error.config);
+            });
+        },
+      },
+    ]);
   };
 
   const updatePhoneButton = async () => {
@@ -92,11 +105,46 @@ const Profile = () => {
       return;
     }
 
-    const {data} = await UpdatePhoneDataAPI({
-      id: user.id,
-      phone: user.phone,
-    });
-    console.log('data : ', data);
+    await Alert.alert(`핸드폰 번호 변경`, `핸드폰 번호 변경하시겠습니까?`, [
+      {
+        text: '취소',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: '확인',
+        onPress: async () => {
+          await UpdatePhoneDataAPI({
+            phone: user.phone,
+          })
+            .then(response => {
+              setUser(response.data.response);
+            })
+            .catch(error => {
+              // Error
+              if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+
+                console.log('error.response : ', error.response);
+                if (error.response.data.response.statusCode === 409) {
+                  Alert.alert('이미 존재하는 번호 입니다.');
+                }
+              } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the
+                // browser and an instance of
+                // http.ClientRequest in node.js
+                console.log('error.request : ', error.request);
+              } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+              }
+              console.log(error.config);
+            });
+        },
+      },
+    ]);
   };
 
   const updateEmailButton = async () => {
@@ -105,11 +153,44 @@ const Profile = () => {
       return;
     }
 
-    const {data} = await UpdateEmailDataAPI({
-      id: user.id,
-      email: user.email,
-    });
-    console.log('data : ', data);
+    await Alert.alert(`이메일 변경`, `이메일 변경하시겠습니까?`, [
+      {
+        text: '취소',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: '확인',
+        onPress: async () => {
+          await UpdateEmailDataAPI({
+            email: user.email,
+          })
+            .then(response => {
+              setUser(response.data.response);
+            })
+            .catch(error => {
+              // Error
+              if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                if (error.response.data.response.statusCode === 409) {
+                  Alert.alert('이미 존재하는 이메일 입니다.');
+                }
+              } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the
+                // browser and an instance of
+                // http.ClientRequest in node.js
+                console.log('error.request : ', error.request);
+              } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+              }
+              console.log(error.config);
+            });
+        },
+      },
+    ]);
   };
 
   const handleChange = (event: {name: string; value: string}): void => {
@@ -130,45 +211,12 @@ const Profile = () => {
             <Text style={styles.textBox}>ID</Text>
             <View style={{width: '100%', flexDirection: 'row'}}>
               <TextInput
-                style={{
-                  borderWidth: 2,
-                  fontFamily: FONT,
-                  width: '80%',
-                  height: 40,
-                  borderRadius: 5,
-                  borderColor: '#999999',
-                  paddingLeft: 8,
-                  color: '#EEEEEE',
-                  letterSpacing: 0.2,
-                }}
+                style={styles.textInputBox}
                 placeholder="ID"
                 placeholderTextColor="#999999"
                 value={user.app_id}
-                onChangeText={value => handleChange({name: 'app_id', value})}
+                editable={false}
               />
-              <Pressable
-                style={({pressed}) => [
-                  {
-                    backgroundColor: pressed ? '#999999' : '#CCCCCC',
-                    borderRadius: 5,
-                    padding: 6,
-                    width: '20%',
-                    height: '95%',
-                  },
-                ]}
-                onPress={updateAppIdButton}>
-                {({pressed}) => (
-                  <Text
-                    style={{
-                      fontFamily: FONT,
-                      color: '#EEEEEE',
-                      textAlign: 'center',
-                      fontSize: 20,
-                    }}>
-                    {pressed ? '전송' : '수정'}
-                  </Text>
-                )}
-              </Pressable>
             </View>
           </View>
           <View style={styles.box}>
@@ -306,20 +354,6 @@ const Profile = () => {
               </Pressable>
             </View>
           </View>
-          <Pressable
-            style={({pressed}) => [
-              {
-                backgroundColor: pressed ? '#999999' : '#CCCCCC',
-                borderRadius: 10,
-                padding: 6,
-              },
-            ]}>
-            {({pressed}) => (
-              <Text style={{fontFamily: FONT, color: '#EEEEEE'}}>
-                {pressed ? '전송 중...' : '수정 전송'}
-              </Text>
-            )}
-          </Pressable>
 
           <View style={styles.horizonLine} />
 
@@ -393,6 +427,11 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#EEEEEE',
     marginVertical: 10,
+  },
+  alertContainer: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });
 

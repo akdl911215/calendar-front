@@ -5,23 +5,15 @@ interface UserSignIn {
   readonly password: string;
 }
 
-interface UserUpdateAppId {
-  readonly id: string;
-  readonly appId: string;
-}
-
 interface UserUpdateNickname {
-  readonly id: string;
   readonly nickname: string;
 }
 
 interface UserUpdatePhone {
-  readonly id: string;
   readonly phone: string;
 }
 
 interface UsersUpdateEmail {
-  readonly id: string;
   readonly email: string;
 }
 
@@ -40,9 +32,6 @@ export const SignInDataAPI = async (user: UserSignIn) =>
   await CLIENT.post(`users/login`, user);
 
 export const InquiryDataAPI = async () => await CLIENT.get('users');
-
-export const UpdateAppIdDataAPI = async (user: UserUpdateAppId) =>
-  await CLIENT.patch('users/update/appId', user);
 
 export const UpdateNicknameDataAPI = async (user: UserUpdateNickname) =>
   await CLIENT.patch('users/update/nickname', user);
