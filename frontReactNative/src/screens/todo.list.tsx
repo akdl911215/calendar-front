@@ -57,9 +57,9 @@ const TodoList: React.FC<TodoListProps> = () => {
           for (let i = 0; i < apiArr.length; ++i) {
             const apiDay: number = apiArr[i].day;
             if (apiDay <= currentTimeStamp) {
-              previousArr.push(apiArr[i]);
-            } else {
               subsequentArr.push(apiArr[i]);
+            } else {
+              previousArr.push(apiArr[i]);
             }
           }
 
@@ -78,7 +78,7 @@ const TodoList: React.FC<TodoListProps> = () => {
     index,
   }: {
     done: boolean;
-    date: Date;
+    date: string;
     index: number;
   }) => {
     const localDate = new Date(date);

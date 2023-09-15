@@ -1,7 +1,7 @@
 type TodoType = Readonly<{
   id: string;
   author_id: string;
-  date: Date;
+  date: string;
   todo: string;
   done: boolean;
   month: number;
