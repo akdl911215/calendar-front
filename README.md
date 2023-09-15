@@ -33,6 +33,9 @@ Skill Speccification: Rect Native
 <br><br>
 ![스크린샷 2023-09-15 오후 7 30 04](https://github.com/akdl911215/calendar-front/assets/76759835/9d5871a6-fdad-4591-8bad-238d8e9d529a)
 <br><br>
+- 리스트가 존재하는 경우
+<br><br>
+![스크린샷 2023-09-15 오후 7 53 29](https://github.com/akdl911215/calendar-front/assets/76759835/6dde8cb4-d161-4b58-abd5-3fabd57a72c0)
 <br><br>
 
 
