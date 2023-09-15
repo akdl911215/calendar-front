@@ -42,8 +42,11 @@ Skill Speccification: Rect Native
 <br><br>
 ### 내정보
 <br><br>
+- 회원가입 화면
+![스크린샷 2023-09-15 오후 7 24 09](https://github.com/akdl911215/calendar-front/assets/76759835/f90df4df-e870-4dbf-ab60-b478ca7c5405)
+<br><br>
 - 로그인 화면
 <br><br>
-![스크린샷 2023-07-28 오후 2 42 37](https://github.com/akdl911215/calendar-front/assets/76759835/d8951f79-5873-4482-bea2-1a344dbbbe39)
-
+![스크린샷 2023-09-15 오후 7 22 28](https://github.com/akdl911215/calendar-front/assets/76759835/55ca9e4c-0d03-4a8b-ba12-1b48bca61902)
+<br><br>
 
