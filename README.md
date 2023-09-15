@@ -31,24 +31,28 @@ Skill Speccification: Rect Native
 <br><br>
 - 빈리스트일 경우
 <br><br>
-![스크린샷 2023-08-17 오후 4 38 57](https://github.com/akdl911215/calendar-front/assets/76759835/f37dd087-22d6-44c8-a595-d077b2fc83ef)
-
-
+![스크린샷 2023-09-15 오후 7 30 04](https://github.com/akdl911215/calendar-front/assets/76759835/9d5871a6-fdad-4591-8bad-238d8e9d529a)
 <br><br>
-- 리스트가 존재할 경우
 <br><br>
-![스크린샷 2023-07-28 오후 2 42 55](https://github.com/akdl911215/calendar-front/assets/76759835/4d969c3a-7549-4763-bac8-f228329deee9)
 
 
 <br><br>
 ### 내정보
 <br><br>
+<br><br>
+- 회원가입 화면
+<br><br>
+![스크린샷 2023-09-15 오후 7 24 09](https://github.com/akdl911215/calendar-front/assets/76759835/f90df4df-e870-4dbf-ab60-b478ca7c5405)
+<br><br>
+<br><br>
 - 로그인 화면
 <br><br>
-![스크린샷 2023-08-17 오후 4 39 12](https://github.com/akdl911215/calendar-front/assets/76759835/b52b6b4b-1c16-4827-9fb5-a65abc363e41)
+![스크린샷 2023-09-15 오후 7 22 28](https://github.com/akdl911215/calendar-front/assets/76759835/55ca9e4c-0d03-4a8b-ba12-1b48bca61902)
+<br><br>
+<br><br>
+- 프로필 화면
+<br><br>
+![스크린샷 2023-09-15 오후 7 29 06](https://github.com/akdl911215/calendar-front/assets/76759835/15b879d2-955d-487c-b3e1-9fbcaae40213)
+<br><br>
 
-<br><br>
-- 프로파일 화면
-<br><br>
-![스크린샷 2023-08-17 오후 4 49 16](https://github.com/akdl911215/calendar-front/assets/76759835/7acb70c4-e4ce-4a48-8848-db0e70283afc)
 
