@@ -100,7 +100,6 @@ const Signup = () => {
     readonly name: string;
   }): Promise<void> => {
     const {name} = event;
-    console.log('name : ', name);
 
     if (name === 'appId') {
       if (!appId) {
@@ -142,7 +141,6 @@ const Signup = () => {
         },
       } = await DuplicateVerificationPhone(phone);
 
-      console.log('phoneExists : ', phoneExists);
       if (phoneExists === 'exists') {
         Alert.alert('존재하는 번호입니다.');
         return;
@@ -169,7 +167,6 @@ const Signup = () => {
         },
       } = await DuplicateVerificationEmail(email);
 
-      console.log('emailExists : ', emailExists);
       if (emailExists === 'exists') {
         Alert.alert('존재하는 이메일입니다.');
         return;
@@ -197,7 +194,6 @@ const Signup = () => {
         },
       } = await DuplicateVerificationNickname(nickname);
 
-      console.log('nicknameExists : ', nicknameExists);
       if (nicknameExists === 'exists') {
         Alert.alert('존재하는 닉네임입니다.');
         return;

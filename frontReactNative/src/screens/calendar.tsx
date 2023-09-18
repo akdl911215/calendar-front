@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import {useEffect, useState} from 'react';
-import {FlatList, View, StyleSheet, Dimensions, Alert} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  Dimensions,
+  Alert,
+  Text,
+} from 'react-native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {Calendar} from 'react-native-calendars';
 import {type RootBottomTabParamList} from '../../App';
@@ -10,10 +17,12 @@ import {useKeyboard} from 'hooks/useKeyboard';
 import TodoViewModal from 'components/todo.view.modal';
 import {CalendarListAPI} from '../api/calendar.api';
 import {DATE} from '../_common/get.date';
+import {Fonts} from '../../assets/fonts/fonts';
 
+const FONT: string = Fonts.BMDOHYEON;
 type CalendarProps = BottomTabScreenProps<RootBottomTabParamList, '달력'>;
 
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const monthNames = Array.from({length: 12}).map(
   (item, index) => `${index + 1}월`,
 );
@@ -38,6 +47,8 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
       deleted_at: null,
     },
   ]);
+  const TodoListTypeArr: TodoType[] = [];
+  const [todoListArr, setTodoListArr] = useState<TodoType[]>(TodoListTypeArr);
 
   const {isKeyboardVisible, keyboardHeight} = useKeyboard();
 
@@ -51,7 +62,7 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
         setDayArray(res.data.response.inquiryList);
       })
       .catch(err => console.log('err : ', err));
-  });
+  }, []);
 
   return (
     <View
@@ -62,8 +73,10 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
       {/* <Calendar /> */}
       <Calendar
         onDayPress={day => {
+          console.log('day : ', day);
+
           setSelected(day.dateString);
-          setIsModalVisible(true);
+          // setIsModalVisible(true);
         }}
         markedDates={{
           [selected]: {
@@ -73,23 +86,43 @@ const CalendarScreen: React.FC<CalendarProps> = () => {
           },
         }}
       />
-      <FlatList
-        style={styles.to_do_list}
-        data={dayArray}
-        renderItem={({item}) => (
-          <ToDo
-            key={item.id}
-            todo={item}
-            setSelectedTodo={setSelectedTodo}
-            setIsModalVisible={setIsViewModalVisible}
-          />
-        )}
-      />
-      <CalendarModal
-        isModalVisible={isModalVisible}
-        setIsModalVisible={setIsModalVisible}
-        selected={selected}
-      />
+      {todoListArr.length === 0 ? (
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            top: height / 2 / 5,
+          }}>
+          <Text
+            style={{
+              fontFamily: FONT,
+              alignSelf: 'center',
+              fontSize: 20,
+              color: 'white',
+            }}>
+            할일을 찾을 수 없어요
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          style={styles.to_do_list}
+          data={dayArray}
+          renderItem={({item}) => (
+            <ToDo
+              key={item.id}
+              todo={item}
+              setSelectedTodo={setSelectedTodo}
+              setIsModalVisible={setIsViewModalVisible}
+            />
+          )}
+        />
+      )}
+
+      {/*<CalendarModal*/}
+      {/*  isModalVisible={isModalVisible}*/}
+      {/*  setIsModalVisible={setIsModalVisible}*/}
+      {/*  selected={selected}*/}
+      {/*/>*/}
       {selectedTodo ? (
         <TodoViewModal
           setIsModalVisible={setIsViewModalVisible}
