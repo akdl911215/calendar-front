@@ -52,7 +52,6 @@ const TodoList: React.FC<TodoListProps> = () => {
         .then(res => {
           const apiArr: TodoType[] = res.data.response.monthList;
           setApiInitialState(apiArr);
-          console.log('apiArr : ', apiArr);
 
           for (let i = 0; i < apiArr.length; ++i) {
             const apiDay: number = apiArr[i].day;
@@ -65,8 +64,6 @@ const TodoList: React.FC<TodoListProps> = () => {
 
           setPrevious(previousArr);
           setSubsequent(subsequentArr);
-          console.log('previousArr : ', previousArr);
-          console.log('subsequentArr : ', subsequentArr);
         })
         .catch(err => console.error(err));
     }
